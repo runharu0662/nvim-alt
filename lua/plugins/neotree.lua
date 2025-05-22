@@ -11,11 +11,12 @@ return {
 	---@module "neo-tree"
 	---@type neotree.Config?
 	opts = {
-		window({
+		window = {
+			width = 30,
 			mappings = {
 				["l"] = "open",
 				["h"] = "close_node",
 			},
-		}),
+		},
 	},
 }
