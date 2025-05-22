@@ -1,6 +1,5 @@
 return {
 	"ya2s/nvim-cursorline",
-	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
 	  require("nvim-cursorline").setup({
 		  cursorline = {
