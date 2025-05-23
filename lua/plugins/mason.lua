@@ -20,7 +20,7 @@ return {
 				"html",
 				"cssls",
 				"gopls",
-				-- "rust_analyzer",
+				"rust_analyzer",
 				"bashls",
 				-- "dockerls",
 				"yamlls",
