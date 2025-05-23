@@ -8,3 +8,5 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 -- number
 vim.opt.number = true
+
+vim.api.nvim_set_option("scrolloff", 4)
