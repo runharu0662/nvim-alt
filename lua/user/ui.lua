@@ -28,7 +28,7 @@ hl(0, "Normal", none)
 hl(0, "NormalNC", none)
 hl(0, "NormalFloat", none)
 hl(0, "FloatBorder", none)
-hl(0, "SignColumn", none)
+-- hl(0, "SignColumn", none)
 hl(0, "EndOfBuffer", none)
 hl(0, "StatusLine", none)
 hl(0, "WinSeparator", none)
@@ -70,5 +70,3 @@ hl(0, "WinBarNC", none)
 
 -- Lspsagaが使うWinbarがあればそれも（例：lspsagaのbreadcrumbs用）
 hl(0, "SagaWinbar", none)
-
-vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#61afef", nocombine = true })
