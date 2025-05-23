@@ -7,4 +7,5 @@ require("user.ui")
 -- grobalにlualine
 vim.o.laststatus = 3
 
+-- "~"を非表示
 vim.opt.fillchars:append({ eob = " " })

@@ -70,3 +70,7 @@ hl(0, "WinBarNC", none)
 
 -- Lspsagaが使うWinbarがあればそれも（例：lspsagaのbreadcrumbs用）
 hl(0, "SagaWinbar", none)
+
+-- hilight indent
+vim.api.nvim_set_hl(0, "IblIndent", { fg = "#555555" })
+vim.api.nvim_set_hl(0, "IblScope",  { fg = "#61afef" })
