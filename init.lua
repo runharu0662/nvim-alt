@@ -60,3 +60,9 @@ hl(0, "TabLineFill", none)
 hl(0, "TabLine", none)
 hl(0, "TabLineSel", none)
 
+-- WinBar本体を透過
+hl(0, "WinBar", none)
+hl(0, "WinBarNC", none)
+
+-- Lspsagaが使うWinbarがあればそれも（例：lspsagaのbreadcrumbs用）
+hl(0, "SagaWinbar", none)
