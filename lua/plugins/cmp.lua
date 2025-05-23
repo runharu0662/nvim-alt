@@ -4,7 +4,11 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 	},
 	config = function()
-		require("config.cmp")({
+		require("cmp.setup")({
+			mapping = {
+				["<C-n>"] = cmp.mapping.complete(),
+				["<CR>"] = map.confirm({ select = false }),
+			},
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
 			}),
