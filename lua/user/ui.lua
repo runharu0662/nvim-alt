@@ -70,8 +70,3 @@ hl(0, "WinBarNC", none)
 
 -- Lspsagaが使うWinbarがあればそれも（例：lspsagaのbreadcrumbs用）
 hl(0, "SagaWinbar", none)
-
--- ~を消す
-vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "none" })
-
