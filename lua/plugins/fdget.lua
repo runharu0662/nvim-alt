@@ -1,5 +1,5 @@
 return {
-	"j-hui/fdget.nvim",
+	"j-hui/fidget.nvim",
 	dependencies = {
 		"neovim/nvim-lspconfig",
 	},
