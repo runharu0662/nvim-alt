@@ -4,7 +4,10 @@ return {
 	requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	config = function()
 		require("lualine").setup({
-			options = { theme = "dracula" },
+			options = {
+				theme = "dracula",
+				globalstatus = true,
+			},
 		})
 	end,
 }
