@@ -7,5 +7,4 @@ return {
 	config = function()
 		require("lspsaga").setup({})
 	end,
-,
 }
