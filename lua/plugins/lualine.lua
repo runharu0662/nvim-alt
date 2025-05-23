@@ -34,7 +34,9 @@ local M = {
                         removed = icons.removed_icon,
                     },
                 },
-
+            },
+        },
+    },
     event = "VeryLazy",
 }
 
