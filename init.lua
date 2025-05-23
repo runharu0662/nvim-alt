@@ -43,17 +43,6 @@ hl(0, "CokelineBufferVisible", none)
 hl(0, "CokelineBufferSelected", none)
 hl(0, "CokelineBufferHidden", none)
 
--- nvim-ufo 関連
-hl(0, "Folded", none)
-hl(0, "UfoFoldedBg", none)
-hl(0, "UfoFoldedFg", { fg = "#888888", bg = "none" })  -- フォント色だけ薄く指定して透過
-hl(0, "UfoPreviewSbar", none)
-hl(0, "UfoPreviewThumb", none)
-hl(0, "UfoPreviewWinBar", none)
-hl(0, "UfoPreviewCursorLine", none)
-hl(0, "UfoPreviewNormal", none)
-hl(0, "UfoPreviewBorder", none)
-
 -- 透明が必要そうなもの
 hl(0, "VertSplit", none)
 hl(0, "TabLineFill", none)
