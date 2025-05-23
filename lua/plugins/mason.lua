@@ -10,27 +10,33 @@ return {
 				border = "single",
 			},
 		})
+
 		require("mason-lspconfig").setup({
 			ensure_installed = {
 				"lua_ls",
-				-- "clangd",
 				"pyright",
 				"tsserver",
 				"jsonls",
 				"html",
 				"cssls",
 				"gopls",
-				"rust_analyzer",
 				"bashls",
-				-- "dockerls",
 				"yamlls",
+				"rust_analyzer", -- Rust 追加！
 			},
-			automatic_installation = true,
 		})
-		require("mason-lspconfig").setup_handlers({
-			function(server_name)
-				require("lspconfig")[server_name].setup({})
-			end,
-		})
+
+		local lspconfig = require("lspconfig")
+
+		lspconfig.lua_ls.setup({})
+		lspconfig.pyright.setup({})
+		lspconfig.tsserver.setup({})
+		lspconfig.jsonls.setup({})
+		lspconfig.html.setup({})
+		lspconfig.cssls.setup({})
+		lspconfig.gopls.setup({})
+		lspconfig.bashls.setup({})
+		lspconfig.yamlls.setup({})
+		lspconfig.rust_analyzer.setup({}) -- Rust 追加！
 	end,
 }
