@@ -6,5 +6,11 @@ return {
 		vim.foldenable = false
 		vim.o.foldlevel = 99
 		vim.o.foldcolumn = "1"
+		vim.opt.fillchars = {
+			fold = " ",
+			foldopen = "▼",
+			foldsep = " ",
+			foldclose = "▶",
+		}
 	end,
 }
