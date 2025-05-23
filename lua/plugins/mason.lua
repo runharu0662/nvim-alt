@@ -16,7 +16,8 @@ return {
 				"lua_ls",
 				"pyright",
 				"jsonls",
-				"ts_ls",
+				-- "ts_ls",
+                "tsserver",
 				"html",
 				"cssls",
 				"gopls",
@@ -38,5 +39,6 @@ return {
 		lspconfig.yamlls.setup({})
 		lspconfig.rust_analyzer.setup({})
 		lspconfig.ts_ls.setup({})
+        lspconfig.tsserver.setup({})
 	end,
 }
