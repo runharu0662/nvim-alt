@@ -30,7 +30,6 @@ return {
 
 		lspconfig.lua_ls.setup({})
 		lspconfig.pyright.setup({})
-		lspconfig.tsserver.setup({})
 		lspconfig.jsonls.setup({})
 		lspconfig.html.setup({})
 		lspconfig.cssls.setup({})
