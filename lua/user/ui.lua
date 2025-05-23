@@ -70,3 +70,5 @@ hl(0, "WinBarNC", none)
 
 -- Lspsagaが使うWinbarがあればそれも（例：lspsagaのbreadcrumbs用）
 hl(0, "SagaWinbar", none)
+
+vim.api.nvim_set_hl(0, "MiniIndentscopeSymbol", { fg = "#61afef", nocombine = true })
