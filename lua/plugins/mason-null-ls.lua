@@ -6,6 +6,7 @@ return {
         "jose-elias-alvarez/null-ls.nvim",
     },
     opts = {
+        automatic_setup = true,
         handlers = {}
     },
 }
