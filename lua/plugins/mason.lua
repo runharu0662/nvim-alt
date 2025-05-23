@@ -16,12 +16,13 @@ return {
 				"lua_ls",
 				"pyright",
 				"jsonls",
+				"ts_ls",
 				"html",
 				"cssls",
 				"gopls",
 				"bashls",
 				"yamlls",
-				"rust_analyzer", -- Rust 追加！
+				"rust_analyzer",
 			},
 		})
 
@@ -35,6 +36,7 @@ return {
 		lspconfig.gopls.setup({})
 		lspconfig.bashls.setup({})
 		lspconfig.yamlls.setup({})
-		lspconfig.rust_analyzer.setup({}) -- Rust 追加！
+		lspconfig.rust_analyzer.setup({})
+		lspconfig.ts_ls.setup({})
 	end,
 }
