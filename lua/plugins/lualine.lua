@@ -7,6 +7,6 @@ return {
 			options = {
 				theme = "dracula",
 				globalstatus = true,
-			},
+			}
 	end,
 }
