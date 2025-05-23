@@ -1,0 +1,20 @@
+local icons = require("user.icons")
+
+local signs = { Error = icons.error_icon, Warn = icons.warn_icon, Hint = icons.hint_icon, Info = icons.info_icon }
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+local icons = require("user.icons")
+
+vim.diagnostic.config({
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = icons.error_icon,
+            [vim.diagnostic.severity.WARN] = icons.warn_icon,
+            [vim.diagnostic.severity.HINT] = icons.hint_icon,
+            [vim.diagnostic.severity.INFO] = icons.info_icon,
+        },
+    },
+})

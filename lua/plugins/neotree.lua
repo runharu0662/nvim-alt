@@ -1,3 +1,4 @@
+local icons = require("user.icons")
 return {
 	"nvim-neo-tree/neo-tree.nvim",
 	branch = "v3.x",
@@ -19,4 +20,32 @@ return {
 			},
 		},
 	},
+    default_component_configs = {
+        diagnostics = {
+            symbols = {
+                hint = icons.hint_icon,
+                info = icons.info_icon,
+                warn = icons.warn_icon,
+                error = icons.error_icon,
+            },
+        },
+        modified = {
+            symbol = icons.modified_icon,
+        },
+        git_status = {
+            symbols = {
+                -- Change type
+                added = icons.added_icon,
+                modified = icons.modified_icon,
+                deleted = icons.deleted_icon,
+                renamed = icons.renamed_icon,
+                -- Status type
+                untracked = icons.untracked_icon,
+                ignored = icons.ignored_icon,
+                unstaged = icons.unstaged_icon,
+                staged = icons.staged_icon,
+                conflict = icons.conflict_icon,
+            },
+        },
+    },
 }
