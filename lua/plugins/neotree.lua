@@ -11,6 +11,7 @@ return {
 	---@module "neo-tree"
 	---@type neotree.Config?
 	opts = {
+		disabled_filetypes = { "NVimTree" },
 		window = {
 			width = 30,
 			mappings = {
