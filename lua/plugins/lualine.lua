@@ -8,7 +8,6 @@ local M = {
     opts = {
         options = {
             theme = "dracula",
-            globalstatus = true, -- ✅ グローバルステータスラインを有効化
         },
         sections = {
             lualine_b = {
