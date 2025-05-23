@@ -1,6 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
-	dependences = {
+	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 	},
 	config = function()
