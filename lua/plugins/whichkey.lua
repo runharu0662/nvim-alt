@@ -42,6 +42,7 @@ return {
 				mode = { "n", "v" }, -- NORMAL and VISUAL mode
 				{ "<leader>q", "<cmd>q<cr>", desc = "Quit" }, -- no need to specify mode since it's inherited
 				{ "<leader>w", "<cmd>w<cr>", desc = "Write" },
+				{ "<leader>Q", "<cmd>wqa<cr>", desc = "Quit All" },
 			},
 		})
 	end,
