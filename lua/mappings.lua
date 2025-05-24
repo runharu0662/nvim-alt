@@ -38,5 +38,15 @@ vim.keymap.set("n", "<Space>jt", ":InsTemp<CR>", { noremap = true, silent = true
 vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
 
 -- diffview
-keymap.set("n", "<leader>ld", "<cmd>DiffviewOpen HEAD~1<CR>", silent)
-keymap.set("n", "<leader>lf", "<cmd>DiffviewFileHistory %<CR>", silent)
+vim.keymap.set(
+    "n",
+    "<leader>ld",
+    "<cmd>DiffviewOpen HEAD~1<CR>",
+    { noemap = true, silent = true, desc = "Open diffview with HEAD~1" }
+)
+vim.keymap.set(
+    "n",
+    "<leader>lf",
+    "<cmd>DiffviewFileHistory %<CR>",
+    { noemap = true, silent = true, desc = "Open diffview file history" }
+)
