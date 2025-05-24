@@ -8,7 +8,7 @@ return {
 		require("lspsaga").setup({
 			ui = {
 				-- Border type can be single, double, rounded, solid, shadow.
-				border = "rounded",
+				border = "single",
 				-- Title for finder and code action popup
 				title = true,
 				-- Set the colors of the title icon and text
