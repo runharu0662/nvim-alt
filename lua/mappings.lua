@@ -29,3 +29,6 @@ vim.keymap.set(
 	":wa <bar> :QuickRun <stdin.txt<CR>",
 	{ noremap = true, silent = true, desc = "cpp QuickRun" }
 )
+
+-- make_stdin
+vim.keymap.set("n", "<Space>rs", ":wa <bar> :RunInput<CR>", { noremap = true, silent = true, desc = "cpp RunInput" })
