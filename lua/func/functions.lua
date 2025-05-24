@@ -24,25 +24,20 @@ vim.opt.updatetime = 500
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local ft = vim.bo[args.buf].filetype
-		if ft == "NvimTree" or ft == "NeogitCommitMessage" then
+		if ft == "nvimtree" or ft == "neogitcommitmessage" then
 			return
 		end
 
 		vim.api.nvim_create_autocmd({ "CursorHold" }, {
 			buffer = args.buf,
 			callback = function()
-				vim.diagnostic.open_float(nil, { focus = false })
-				-- lspsagaのhover使うなら：
-				-- require('lspsaga.hover').render_hover_doc()
+				vim.diagnostic.open_float(nil, {
+					focus = false,
+					border = "rounded", -- ← これを追加
+				})
 			end,
 		})
 	end,
-})
-
--- floatwindowに枠線を追加
-vim.diagnostic.open_float(nil, {
-	focus = false,
-	border = "rounded", -- ← ここで枠線を付ける
 })
 
 vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
