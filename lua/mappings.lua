@@ -16,17 +16,16 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help ta
 
 -- nole-ls
 vim.keymap.set("n", "<leader>n", function()
-    vim.lsp.buf.format({
-        timeout_ms = 200,
-        async = true,
-    })
+	vim.lsp.buf.format({
+		timeout_ms = 200,
+		async = true,
+	})
 end, { desc = "Format with null-ls" })
 
 -- quickrun
-vim.keymap.set("n", "<leader>i", "<Nop>", { noremap = true, silent = true, desc = "about cpp" })
 vim.keymap.set(
-    "n",
-    "<Space>cr",
-    ":wa <bar> :QuickRun <stdin.txt<CR>",
-    { noremap = true, silent = true, desc = "cpp QuickRun" }
+	"n",
+	"<Space>rr",
+	":wa <bar> :QuickRun <stdin.txt<CR>",
+	{ noremap = true, silent = true, desc = "cpp QuickRun" }
 )
