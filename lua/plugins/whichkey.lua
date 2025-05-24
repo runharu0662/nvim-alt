@@ -20,7 +20,7 @@ return {
 		wk.add({
 			{ "<leader>l", group = "git" }, -- group
 			{ "<leader>f", group = "file" }, -- group
-			{ "<leader>r", group = "quickrun" }, -- group
+			{ "<leader>j", group = "quickrun" }, -- group
 			-- { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
 			{
 				"<leader>fb",
