@@ -17,3 +17,9 @@ vim.api.nvim_set_option("scrolloff", 4)
 
 -- clipboard
 vim.opt.clipboard = "unnamedplus"
+
+-- grobalにlualine
+vim.o.laststatus = 3
+
+-- "~"を非表示
+vim.opt.fillchars:append({ eob = " " })
