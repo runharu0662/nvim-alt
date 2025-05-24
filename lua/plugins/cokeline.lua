@@ -37,12 +37,6 @@ return {
                     end,
                 },
                 {
-                    text = "󰖭",
-                    on_click = function(_, _, _, _, buffer)
-                        buffer:delete()
-                    end,
-                },
-                {
                     text = "  ",
                 },
             },
