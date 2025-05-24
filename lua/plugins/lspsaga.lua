@@ -5,10 +5,6 @@ return {
         "nvim-tree/nvim-web-devicons",     -- optional
     },
     config = function()
-        require("lspsaga").setup({
-            lightbulb = {
-                enabe = false,
-            },
-        })
+        require("lspsaga").setup({})
     end,
 }
