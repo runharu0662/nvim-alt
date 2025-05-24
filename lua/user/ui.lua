@@ -19,11 +19,11 @@ vim.diagnostic.config({
     },
 })
 
--- user/ui.lua
+-- ベース
 local hl = vim.api.nvim_set_hl
 local none = { bg = "none" }
 
--- 基本 UI
+-- 基本UI
 hl(0, "Normal", none)
 hl(0, "NormalNC", none)
 hl(0, "NormalFloat", none)
@@ -33,9 +33,7 @@ hl(0, "EndOfBuffer", none)
 hl(0, "StatusLine", none)
 hl(0, "WinSeparator", none)
 
--- Pmenu / Telescope
-hl(0, "Pmenu", none)
-hl(0, "PmenuSel", none)
+-- Telescope
 hl(0, "TelescopeNormal", none)
 hl(0, "TelescopeBorder", none)
 hl(0, "TelescopePromptNormal", none)
@@ -48,17 +46,27 @@ hl(0, "TelescopePreviewBorder", none)
 -- Neo-tree
 hl(0, "NeoTreeNormal", none)
 hl(0, "NeoTreeNormalNC", none)
-hl(0, "NeoTreeFloatBorder", none)
 hl(0, "NeoTreeEndOfBuffer", none)
+hl(0, "NeoTreeFloatBorder", none)
 hl(0, "NeoTreeWinSeparator", none)
 
--- LSPSaga
-hl(0, "SagaNormal", none)
-hl(0, "SagaBorder", none)
-hl(0, "SagaWinbarSep", none)
-
 -- Cokeline
+hl(0, "CokelineTab", none)
+hl(0, "CokelineTabSelected", none)
 hl(0, "CokelineBackground", none)
-hl(0, "CokelineBufferSelected", none)
 hl(0, "CokelineBufferVisible", none)
-hl(0, "CokelineBuffer", none)
+hl(0, "CokelineBufferSelected", none)
+hl(0, "CokelineBufferHidden", none)
+
+-- 透明が必要そうなもの
+hl(0, "VertSplit", none)
+hl(0, "TabLineFill", none)
+hl(0, "TabLine", none)
+hl(0, "TabLineSel", none)
+
+-- WinBar本体を透過
+hl(0, "WinBar", none)
+hl(0, "WinBarNC", none)
+
+-- Lspsagaが使うWinbarがあればそれも（例：lspsagaのbreadcrumbs用）
+hl(0, "SagaWinbar", none)
