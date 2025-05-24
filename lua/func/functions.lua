@@ -19,7 +19,7 @@ vim.api.nvim_create_user_command("InsTemp", function()
 end, {})
 
 -- 参考:https://qiita.com/nao-a/items/631bd5aa3bd20b2b3da1
-vim.opt.updatetime = 1000
+vim.opt.updatetime = 500
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
