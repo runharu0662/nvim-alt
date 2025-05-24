@@ -1,7 +1,7 @@
 require("config.lazy")
 require("mappings")
 require("options")
-require("func.make_stdin")
+require("func.functions")
 vim.cmd([[colorscheme tokyonight-storm]])
 require("user.ui")
 
