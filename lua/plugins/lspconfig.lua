@@ -5,11 +5,6 @@ return {
         local lspconfig = require("lspconfig")
         lspconfig.clangd.setup({
             cmd = {
-                "clangd",
-                "--clang-tidy",
-                "--header-insertion=never",
-                "--completion-style=detailed",
-                "--pch-storage=memory",
                 "--std=c++20",
             },
         })
