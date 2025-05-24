@@ -15,10 +15,10 @@ vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" 
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
 
 -- nole-ls
-vim.keymap.set('n', '<leader>nl', function()
+vim.keymap.set('n', '<leader>n', function()
   vim.lsp.buf.format {
    timeout_ms = 200,
     async = true,
   }
-end)
+end, { desc = "Format with null-ls" })
 
