@@ -9,9 +9,13 @@ return {
         local map = cmp.mapping
 
         cmp.setup({
+            completion = {
+                completeopt = "menu,menuone,noinsert",
+            },
             mapping = map.preset.insert({
                 ["<C-n>"] = map.complete(),
                 ["<CR>"] = map.confirm({ select = false }),
+                ["<Tab>"] = map.confirm({ select = true }),
             }),
         })
 
