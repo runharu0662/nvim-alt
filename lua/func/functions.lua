@@ -8,3 +8,12 @@ vim.api.nvim_create_user_command("RunInput", function()
 	vim.cmd("split " .. path)
 	vim.cmd("resize 10") -- 高さを10行に調整（お好みで）
 end, {})
+
+-- テンプレートファイルの挿入コマンド
+vim.api.nvim_create_user_command("InsTemp", function()
+	-- テンプレートファイルのパスを指定
+	local template_path = "~/.config/nvim/template/atc.cpp"
+
+	-- テンプレートファイルの内容を現在のバッファに挿入
+	vim.cmd("0r " .. template_path)
+end, {})

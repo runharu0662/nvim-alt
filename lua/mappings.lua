@@ -32,3 +32,4 @@ vim.keymap.set(
 
 -- make_stdin
 vim.keymap.set("n", "<Space>js", ":wa <bar> :RunInput<CR>", { noremap = true, silent = true, desc = "cpp RunInput" })
+vim.keymap.set("n", "<Space>jt", ":InsTemp<CR>", { noremap = true, silent = true, desc = "Insert cpp Template" })
