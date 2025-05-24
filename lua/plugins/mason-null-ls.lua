@@ -17,7 +17,6 @@ return {
         "prettier",
       },
       handlers = {
-        function() end, -- 全自動登録を無効化
         stylua = function()
           null_ls.register(null_ls.builtins.formatting.stylua)
         end,
