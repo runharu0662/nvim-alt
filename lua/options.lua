@@ -9,8 +9,9 @@ vim.opt.shiftwidth = 4
 -- number
 vim.opt.number = true
 
+vim.o.splitright = true
+
 vim.api.nvim_set_option("scrolloff", 4)
 
 -- clipboard
 vim.opt.clipboard = "unnamedplus"
-
