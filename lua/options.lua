@@ -9,7 +9,9 @@ vim.opt.shiftwidth = 4
 -- number
 vim.opt.number = true
 
+-- new split direction
 vim.o.splitright = true
+vim.o.splitbelow = true
 
 vim.api.nvim_set_option("scrolloff", 4)
 
