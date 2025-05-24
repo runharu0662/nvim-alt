@@ -13,9 +13,13 @@ return {
                 completeopt = "menu,menuone,noinsert",
             },
             mapping = map.preset.insert({
-                ["<C-n>"] = map.complete(),
+                ["<C-p>"] = map.select_prev_item(),
+                ["<C-n>"] = map.select_next_item(),
                 ["<CR>"] = map.confirm({ select = false }),
                 ["<Tab>"] = map.confirm({ select = true }),
+            }),
+            sources = cmp.config.sources({
+                { name = "nvim_lsp" },
             }),
         })
 
