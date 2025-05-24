@@ -16,18 +16,18 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help ta
 
 -- nole-ls
 vim.keymap.set("n", "<leader>n", function()
-    vim.lsp.buf.format({
-        timeout_ms = 200,
-        async = true,
-    })
+	vim.lsp.buf.format({
+		timeout_ms = 200,
+		async = true,
+	})
 end, { desc = "Format with null-ls" })
 
 -- quickrun
 vim.keymap.set(
-    "n",
-    "<Space>jj",
-    ":wa <bar> :QuickRun <stdin.txt<CR>",
-    { noremap = true, silent = true, desc = "cpp QuickRun" }
+	"n",
+	"<Space>jj",
+	":wa <bar> :QuickRun <stdin.txt<CR>",
+	{ noremap = true, silent = true, desc = "cpp QuickRun" }
 )
 
 -- make_stdin
@@ -36,4 +36,3 @@ vim.keymap.set("n", "<Space>jt", ":InsTemp<CR>", { noremap = true, silent = true
 
 -- close buffer
 vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
-b
