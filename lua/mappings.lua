@@ -36,3 +36,7 @@ vim.keymap.set("n", "<Space>jt", ":InsTemp<CR>", { noremap = true, silent = true
 
 -- close buffer
 vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
+
+-- diffview
+keymap.set("n", "<leader>ld", "<cmd>DiffviewOpen HEAD~1<CR>", silent)
+keymap.set("n", "<leader>lf", "<cmd>DiffviewFileHistory %<CR>", silent)
