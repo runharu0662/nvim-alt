@@ -21,6 +21,10 @@ return {
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },
             }),
+            window = {
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
+            },
         })
 
         vim.lsp.config("*", {
