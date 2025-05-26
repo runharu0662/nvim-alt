@@ -1,3 +1,6 @@
+-- change f to $
+vim.keymap.set("n", "f", "$", { noremap = true })
+
 -- move between windows
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to below window" })
@@ -16,18 +19,18 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help ta
 
 -- nole-ls
 vim.keymap.set("n", "<leader>n", function()
-	vim.lsp.buf.format({
-		timeout_ms = 200,
-		async = true,
-	})
+    vim.lsp.buf.format({
+        timeout_ms = 200,
+        async = true,
+    })
 end, { desc = "Format with null-ls" })
 
 -- quickrun
 vim.keymap.set(
-	"n",
-	"<Space>jj",
-	":wa <bar> :QuickRun <stdin.txt<CR>",
-	{ noremap = true, silent = true, desc = "cpp QuickRun" }
+    "n",
+    "<Space>jj",
+    ":wa <bar> :QuickRun <stdin.txt<CR>",
+    { noremap = true, silent = true, desc = "cpp QuickRun" }
 )
 
 -- make_stdin
@@ -39,14 +42,14 @@ vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close current bu
 
 -- diffview
 vim.keymap.set(
-	"n",
-	"<leader>ld",
-	"<cmd>DiffviewOpen HEAD~1<CR>",
-	{ noremap = true, silent = true, desc = "Open diffview with HEAD~1" }
+    "n",
+    "<leader>ld",
+    "<cmd>DiffviewOpen HEAD~1<CR>",
+    { noremap = true, silent = true, desc = "Open diffview with HEAD~1" }
 )
 vim.keymap.set(
-	"n",
-	"<leader>lf",
-	"<cmd>DiffviewFileHistory %<CR>",
-	{ noremap = true, silent = true, desc = "Open diffview file history" }
+    "n",
+    "<leader>lf",
+    "<cmd>DiffviewFileHistory %<CR>",
+    { noremap = true, silent = true, desc = "Open diffview file history" }
 )
