@@ -28,8 +28,8 @@ vim.keymap.set("n", "<leader>n", function()
 	})
 end, { desc = "Format with null-ls" })
 
--- quickrun
-vim.keymap.set("n", "<leader>jj", ":Jaq<CR>", { desc = "Run C++20 with stdin", silent = true })
+-- jaq-nvim(quickrun)
+vim.keymap.set("n", "<leader>jj", ":<C-u>Jaq<CR>", { desc = "Run C++20 with stdin", silent = true })
 
 -- make_stdin
 vim.keymap.set("n", "<Space>js", ":wa <bar> :RunInput<CR>", { noremap = true, silent = true, desc = "cpp RunInput" })
