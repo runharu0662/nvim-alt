@@ -88,8 +88,12 @@ end, { desc = "Toggle horizontal terminal" })
 local Terminal = require("toggleterm.terminal").Terminal
 
 local function run_cpp()
+	vim.cmd("wa") -- Save all files before running
 	local file = vim.fn.expand("%")
-	local cmd = "/usr/bin/time -f '\n[Time] %es' g++ -std=c++20 " .. file .. " -o a.out && ./a.out < stdin.txt"
+
+	local cmd = "/opt/homebrew/bin/gtime -f '\n[Time] %es' g++ -std=c++20 "
+		.. file
+		.. " -o a.out && ./a.out < stdin.txt"
 
 	local cpp_term = Terminal:new({
 		cmd = cmd,
