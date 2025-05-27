@@ -1,75 +1,64 @@
 return {
-    "is0n/jaq-nvim",
-    config = function()
-        require("jaq-nvim").setup({
-            cmds = {
-                -- Uses vim commands
-                internal = {
-                    lua = "luafile %",
-                    vim = "source %",
-                },
+	"is0n/jaq-nvim",
+	config = function()
+		require("jaq-nvim").setup({
+			cmds = {
+				-- C++20 に対応したコンパイル & stdin.txt を標準入力に
+				cpp = "g++ -std=c++20 % -o a.out && ./a.out < stdin.txt",
+			},
 
-                -- Uses shell commands
-                external = {
-                    markdown = "glow %",
-                    python = "python3 %",
-                    go = "go run %",
-                    sh = "sh %",
-                },
-            },
+			behavior = {
+				-- Default type
+				default = "float",
 
-            behavior = {
-                -- Default type
-                default = "float",
+				-- Start in insert mode
+				startinsert = false,
 
-                -- Start in insert mode
-                startinsert = false,
+				-- Use `wincmd p` on startup
+				wincmd = false,
 
-                -- Use `wincmd p` on startup
-                wincmd = false,
+				-- Auto-save files
+				autosave = true,
+			},
 
-                -- Auto-save files
-                autosave = false,
-            },
+			ui = {
+				float = {
+					-- See ':h nvim_open_win'
+					border = "rounded",
 
-            ui = {
-                float = {
-                    -- See ':h nvim_open_win'
-                    border = "none",
+					-- See ':h winhl'
+					winhl = "Normal",
+					borderhl = "FloatBorder",
 
-                    -- See ':h winhl'
-                    winhl = "Normal",
-                    borderhl = "FloatBorder",
+					-- See ':h winblend'
+					winblend = 0,
 
-                    -- See ':h winblend'
-                    winblend = 0,
+					-- Num from `0-1` for measurements
+					height = 0.8,
+					width = 0.8,
+					x = 0.5,
+					y = 0.5,
+				},
 
-                    -- Num from `0-1` for measurements
-                    height = 0.8,
-                    width = 0.8,
-                    x = 0.5,
-                    y = 0.5,
-                },
+				terminal = {
+					-- Window position
+					position = "bot",
 
-                terminal = {
-                    -- Window position
-                    position = "bot",
+					-- Window size
+					size = 10,
 
-                    -- Window size
-                    size = 10,
+					-- Disable line numbers
+					line_no = false,
+				},
 
-                    -- Disable line numbers
-                    line_no = false,
-                },
+				quickfix = {
+					-- Window position
+					position = "bot",
 
-                quickfix = {
-                    -- Window position
-                    position = "bot",
-
-                    -- Window size
-                    size = 10,
-                },
-            },
-        })
-    end,
+					-- Window size
+					size = 10,
+				},
+			},
+		})
+	end,
 }
