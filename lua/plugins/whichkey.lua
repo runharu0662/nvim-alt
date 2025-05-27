@@ -23,6 +23,7 @@ return {
 			{ "<leader>j", group = "cpp_env" }, -- group
 			{ "<leader>h", group = "hop" },
 			{ "<leader>r", group = "rename" },
+			{ "<leader>t", group = "toggleterm" },
 			-- { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
 			{
 				"<leader>fb",
