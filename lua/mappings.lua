@@ -2,8 +2,8 @@
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol (LSP)" })
 
 -- change f to $
-vim.keymap.set({ "n", "v" }, "f", "$", { noremap = true })
-vim.keymap.set({ "n", "v" }, "F", "0", { noremap = true })
+vim.keymap.set({ "n", "v" }, "F", "$", { noremap = true })
+vim.keymap.set({ "n", "v" }, "f", "0", { noremap = true })
 -- move between windows
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to below window" })
