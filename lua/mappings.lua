@@ -91,7 +91,7 @@ local function run_cpp()
     vim.cmd("wa") -- Save all files before running
     local file = vim.fn.expand("%")
 
-    local cmd = "/opt/homebrew/bin/gtime -f '\n\n\n[Time] %es' g++ -std=c++20 "
+    local cmd = "/opt/homebrew/bin/gtime -f '[Time] %es\n\n\n' g++ -std=c++20 "
         .. file
         .. " -o a.out && ./a.out < stdin.txt"
 
