@@ -22,14 +22,11 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help ta
 
 -- nole-ls
 vim.keymap.set("n", "<leader>n", function()
-	vim.lsp.buf.format({
-		timeout_ms = 200,
-		async = true,
-	})
+    vim.lsp.buf.format({
+        timeout_ms = 200,
+        async = true,
+    })
 end, { desc = "Format with null-ls" })
-
--- jaq-nvim(quickrun)
-vim.keymap.set("n", "<leader>jj", ":<C-u>Jaq<CR>", { desc = "Run C++20 with stdin", silent = true })
 
 -- make_stdin
 vim.keymap.set("n", "<Space>js", ":wa <bar> :RunInput<CR>", { noremap = true, silent = true, desc = "cpp RunInput" })
@@ -40,14 +37,14 @@ vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close current bu
 
 -- diffview
 vim.keymap.set(
-	"n",
-	"<leader>ld",
-	"<cmd>DiffviewOpen HEAD~1<CR>",
-	{ noremap = true, silent = true, desc = "Open diffview with HEAD~1" }
+    "n",
+    "<leader>ld",
+    "<cmd>DiffviewOpen HEAD~1<CR>",
+    { noremap = true, silent = true, desc = "Open diffview with HEAD~1" }
 )
 vim.keymap.set(
-	"n",
-	"<leader>lf",
-	"<cmd>DiffviewFileHistory %<CR>",
-	{ noremap = true, silent = true, desc = "Open diffview file history" }
+    "n",
+    "<leader>lf",
+    "<cmd>DiffviewFileHistory %<CR>",
+    { noremap = true, silent = true, desc = "Open diffview file history" }
 )
