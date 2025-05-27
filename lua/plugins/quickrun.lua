@@ -1,9 +1,9 @@
 -- plugins/jaq-nvim.lua
 return {
-    "thinca/vim-quickrun",
-    config = function()
-        -- QuickRun の設定
-        vim.cmd([[
+	"thinca/vim-quickrun",
+	config = function()
+		-- QuickRun の設定
+		vim.cmd([[
       let g:quickrun_config = {}
 
       " C++ファイルを実行する時に、実行時間を計測する
@@ -19,5 +19,5 @@ return {
       \  'outputter/buffer/into' : 'quickrun#preview#float',
       \  'hook/time/enable' : 1
       \}    ]])
-    end,
+	end,
 }
