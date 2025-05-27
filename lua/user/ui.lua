@@ -70,3 +70,12 @@ hl(0, "WinBarNC", none)
 
 -- Lspsagaが使うWinbarがあればそれも（例：lspsagaのbreadcrumbs用）
 hl(0, "SagaWinbar", none)
+
+-- terminalの背景を透過
+local none = { bg = "none" }
+
+vim.api.nvim_set_hl(0, "Normal", none)
+vim.api.nvim_set_hl(0, "NormalNC", none)
+vim.api.nvim_set_hl(0, "TermNormal", none)   -- split terminal 用
+vim.api.nvim_set_hl(0, "TermNormalNC", none) -- 非アクティブ時用（必要なら）
+vim.api.nvim_set_hl(0, "EndOfBuffer", none)
