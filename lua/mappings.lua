@@ -1,3 +1,11 @@
+-- Add notify setting
+vim.keymap.set("n", "<leader>fn", function()
+	telescope.extensions.notify.notify()
+end, {
+	desc = "Find Nofify Logs",
+})
+vim.notify = require("notify")
+
 -- off highlight when gd
 vim.keymap.set("n", "gd", function()
 	vim.cmd("normal! gd")
