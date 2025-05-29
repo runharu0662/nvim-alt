@@ -108,7 +108,5 @@ return {
 			timeout = 3000,
 			top_down = false,
 		})
-		local telescope = require("telescope")
-		telescope.load_extension("notify")
 	end,
 }
