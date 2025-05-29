@@ -1,9 +1,3 @@
--- off highlight when gd
-vim.keymap.set("n", "gd", function()
-    vim.cmd("normal! gd")
-    vim.cmd("nohlsearch")
-end, { noremap = true, silent = true })
-
 -- rename function
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol (LSP)" })
 
