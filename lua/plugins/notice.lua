@@ -113,7 +113,9 @@ return {
 
         vim.keymap.set("n", "<leader>fn", function()
             telescope.extensions.notify.notify()
-        end)
+        end,
+            desc = {"See notify log"}
+        )
         vim.notify = require("notify")
     end,
 }
