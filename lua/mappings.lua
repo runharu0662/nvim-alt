@@ -1,4 +1,9 @@
--- rename function
+-- Add notify setting
+vim.keymap.set("n", "<leader>fn", function()
+    telescope.extensions.notify.notify()
+end, {
+    desc = "Find Nofify Logs",
+}) -- rename function
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol (LSP)" })
 
 -- change f to $

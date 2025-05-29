@@ -102,4 +102,11 @@ return {
         "MunifTanjim/nui.nvim",
         "rcarriga/nvim-notify",
     },
+    config = function()
+        require("notify").setup({
+            stages = "fade",
+            timeout = 3000,
+            top_down = false,
+        })
+    end,
 }
