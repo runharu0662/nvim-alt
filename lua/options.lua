@@ -21,5 +21,8 @@ vim.opt.clipboard = "unnamedplus"
 -- grobalにlualine
 vim.o.laststatus = 3
 
+-- signcolumn lightbulb
+vim.o.signcolumn = "yes"
+
 -- "~"を非表示
 vim.opt.fillchars:append({ eob = " " })
