@@ -21,8 +21,14 @@ vim.opt.clipboard = "unnamedplus"
 -- disable "~"
 vim.opt.fillchars:append({ eob = " " })
 
--- disabele line
+-- disabele cmdline
 vim.opt.cmdheight = 0
+
+-- grobalize statusline
 vim.opt.laststatus = 3
 
-vim.opt.showtabline = 0 -- 必要ないなら0にする
+-- disable tabline
+vim.opt.showtabline = 0
+
+-- disable line
+vim.opt.signcolumn = "yes"
