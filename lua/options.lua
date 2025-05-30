@@ -28,8 +28,8 @@ vim.opt.laststatus = 3
 vim.opt.cmdheight = 0
 vim.opt.fillchars:append({ eob = " " })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-	callback = function()
-		vim.opt.cmdheight = 0
-	end,
+require("noice").setup({
+    cmdline = {
+        view = "cmdline_popup",
+    },
 })
