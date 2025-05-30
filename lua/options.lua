@@ -18,18 +18,20 @@ vim.api.nvim_set_option("scrolloff", 4)
 -- clipboard
 vim.opt.clipboard = "unnamedplus"
 
--- grobalにlualine
-vim.o.laststatus = 3
+-- disable "~"
+vim.opt.fillchars:append({ eob = " " })
 
--- signcolumn lightbulb
-vim.o.signcolumn = "yes"
-
+-- disable cmdline
 vim.opt.laststatus = 3
 vim.opt.cmdheight = 0
-vim.opt.fillchars:append({ eob = " " })
 
 require("noice").setup({
     cmdline = {
+        enabled = true,
         view = "cmdline_popup",
+    },
+    presets = {
+        bottom_search = false,
+        command_palette = false,
     },
 })
