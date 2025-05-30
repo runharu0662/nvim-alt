@@ -19,11 +19,10 @@ vim.diagnostic.config({
     },
 })
 
--- ベース
 local hl = vim.api.nvim_set_hl
 local none = { bg = "none" }
 
--- 基本UI
+-- basic UI
 hl(0, "Normal", none)
 hl(0, "NormalNC", none)
 hl(0, "NormalFloat", none)
@@ -49,14 +48,6 @@ hl(0, "NeoTreeNormalNC", none)
 hl(0, "NeoTreeEndOfBuffer", none)
 hl(0, "NeoTreeFloatBorder", none)
 hl(0, "NeoTreeWinSeparator", none)
-
--- Cokeline
-hl(0, "CokelineTab", none)
-hl(0, "CokelineTabSelected", none)
-hl(0, "CokelineBackground", none)
-hl(0, "CokelineBufferVisible", none)
-hl(0, "CokelineBufferSelected", none)
-hl(0, "CokelineBufferHidden", none)
 
 -- 透明が必要そうなもの
 hl(0, "VertSplit", none)
