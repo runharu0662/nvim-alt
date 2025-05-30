@@ -26,3 +26,6 @@ vim.o.signcolumn = "yes"
 
 -- "~"を非表示
 vim.opt.fillchars:append({ eob = " " })
+
+-- laststatus
+vim.opt.laststatus = 0
