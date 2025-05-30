@@ -29,3 +29,4 @@ vim.opt.fillchars:append({ eob = " " })
 
 -- disable command line
 vim.opt.cmdheight = 0
+vim.opt.laststatus = 3
