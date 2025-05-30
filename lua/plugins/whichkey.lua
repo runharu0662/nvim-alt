@@ -19,20 +19,12 @@ return {
 		local wk = require("which-key")
 		wk.add({
 			{ "<leader>l", group = "git" }, -- group
-			{ "<leader>f", group = "file" }, -- group
+			{ "<leader>f", group = "telescope" }, -- group
 			{ "<leader>j", group = "cpp_env" }, -- group
-			{ "<leader>t", group = "terminal" }, -- group
 			{ "<leader>h", group = "hop" },
 			{ "<leader>r", group = "rename" },
 			{ "<leader>c", group = "lspsaga" },
 			-- { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
-			{
-				"<leader>fb",
-				function()
-					print("hello")
-				end,
-				desc = "Foobar",
-			},
 			{
 				"<leader>b",
 				group = "buffers",
