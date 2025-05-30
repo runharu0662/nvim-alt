@@ -21,17 +21,8 @@ vim.opt.clipboard = "unnamedplus"
 -- disable "~"
 vim.opt.fillchars:append({ eob = " " })
 
--- disable cmdline
-vim.opt.laststatus = 3
+-- disabele line
 vim.opt.cmdheight = 0
+vim.opt.laststatus = 3
 
-require("noice").setup({
-    cmdline = {
-        enabled = true,
-        view = "cmdline_popup",
-    },
-    presets = {
-        bottom_search = false,
-        command_palette = false,
-    },
-})
+vim.opt.showtabline = 0 -- 必要ないなら0にする

@@ -1,23 +1,20 @@
 return {
-    "folke/noice.nvim",
-    dependencies = {
-        "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
-    },
-    config = function()
-        require("noice").setup({
-            cmdline = {
-                enabled = true,
-                view = "cmdline_popup",
-            },
-        })
-        require("notify").setup({
-            background_colour = "#000000",
-            stages = "fade_in_slide_out",
-            timeout = 3000,
-            max_width = 80,
-            max_height = 10,
-            top_down = false,
-        })
-    end,
+	"folke/noice.nvim",
+	event = "VeryLazy",
+	dependencies = {
+		"MunifTanjim/nui.nvim",
+		"rcarriga/nvim-notify",
+	},
+	opts = {
+		cmdline = {
+			view = "cmdline_popup",
+		},
+		messages = {
+			view = "mini",
+			view_error = "mini",
+			view_warn = "mini",
+			view_history = "messages",
+			view_search = "virtualtext",
+		},
+	},
 }
