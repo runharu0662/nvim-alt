@@ -24,8 +24,8 @@ vim.o.laststatus = 3
 -- signcolumn lightbulb
 vim.o.signcolumn = "yes"
 
--- "~"を非表示
+-- unview "~"
 vim.opt.fillchars:append({ eob = " " })
 
--- laststatus
-vim.opt.laststatus = 0
+-- disable command line
+vim.opt.cmdheight = 0
