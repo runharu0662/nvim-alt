@@ -9,16 +9,6 @@ return {
             cmdline = {
                 enabled = true,
                 view = "cmdline_popup",
-                format = {
-                    search_down = { view = "cmdline" },
-                    search_up = { view = "cmdline" },
-                },
-            },
-            messages = {
-                enabled = true,
-            },
-            popupmenu = {
-                enabled = true,
             },
         })
         require("notify").setup({
