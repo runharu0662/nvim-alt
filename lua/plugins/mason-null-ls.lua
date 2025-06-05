@@ -1,7 +1,6 @@
 return {
 	"jay-babu/mason-null-ls.nvim",
-	lazy = false,
-	event = { "BufReadPre", "BufNewFile" },
+	lazy = false, -- Load immediately; no need for event-based lazy loading
 	dependencies = {
 		"williamboman/mason.nvim",
 		"nvimtools/none-ls.nvim",
@@ -11,7 +10,7 @@ return {
 		local null_ls = require("null-ls")
 		local mason_null_ls = require("mason-null-ls")
 
-		-- format on save
+		-- Format on save setup
 		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 		null_ls.setup({
 			on_attach = function(client, bufnr)
@@ -28,18 +27,19 @@ return {
 			end,
 		})
 
-		-- mason-null-ls
+		-- Mason-null-ls integration: auto-install and auto-register tools
 		mason_null_ls.setup({
 			ensure_installed = {
-				"stylua",
-				"prettier",
-				"clang-format",
-				"cpplint",
-				"eslint_d",
-				"golangci-lint",
-				"stylelint",
+				"stylua", -- Lua formatter
+				"prettier", -- JS, HTML, CSS formatter
+				"clang-format", -- C/C++ formatter
+				"cpplint", -- C++ linter
+				"eslint_d", -- JS/TS linter
+				"golangci-lint", -- Go linter
+				"stylelint", -- CSS linter
+				"goimports", -- Go formatter
 			},
-			handlers = {}, -- automatically register handlers for installed tools
+			handlers = {}, -- Enable automatic registration of installed sources
 		})
 	end,
 }
