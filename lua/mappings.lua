@@ -1,11 +1,18 @@
+-- split right
+vim.keymap.set("n", "<leader>v", ":vsplit<CR>", {
+    noremap = true,
+    silent = true,
+    desc = "Split window vertically (right)",
+})
+
 -- lspsaga code_action
 vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "Code Action" })
 
 -- Add notify setting
 vim.keymap.set("n", "<leader>fn", function()
-	telescope.extensions.notify.notify()
+    telescope.extensions.notify.notify()
 end, {
-	desc = "Find Nofify Logs",
+    desc = "Find Nofify Logs",
 }) -- rename function
 
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol (LSP)" })
@@ -32,10 +39,10 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help ta
 
 -- nole-ls
 vim.keymap.set("n", "<leader>n", function()
-	vim.lsp.buf.format({
-		timeout_ms = 200,
-		async = true,
-	})
+    vim.lsp.buf.format({
+        timeout_ms = 200,
+        async = true,
+    })
 end, { desc = "Format with null-ls" })
 
 -- make_stdin
@@ -47,16 +54,16 @@ vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close current bu
 
 -- diffview
 vim.keymap.set(
-	"n",
-	"<leader>ld",
-	"<cmd>DiffviewOpen HEAD~1<CR>",
-	{ noremap = true, silent = true, desc = "Open diffview with HEAD~1" }
+    "n",
+    "<leader>ld",
+    "<cmd>DiffviewOpen HEAD~1<CR>",
+    { noremap = true, silent = true, desc = "Open diffview with HEAD~1" }
 )
 vim.keymap.set(
-	"n",
-	"<leader>lf",
-	"<cmd>DiffviewFileHistory %<CR>",
-	{ noremap = true, silent = true, desc = "Open diffview file history" }
+    "n",
+    "<leader>lf",
+    "<cmd>DiffviewFileHistory %<CR>",
+    { noremap = true, silent = true, desc = "Open diffview file history" }
 )
 
 -- toggleterm
@@ -64,54 +71,54 @@ local Terminal = require("toggleterm.terminal").Terminal
 
 -- Float terminal
 local float_term = Terminal:new({
-	direction = "float",
-	float_opts = {
-		border = "rounded",
-	},
-	hidden = true,
+    direction = "float",
+    float_opts = {
+        border = "rounded",
+    },
+    hidden = true,
 })
 vim.keymap.set("n", "<leader>tf", function()
-	float_term:toggle()
+    float_term:toggle()
 end, { desc = "Toggle float terminal" })
 
 -- Vertical split terminal
 local vert_term = Terminal:new({
-	direction = "vertical",
-	size = 60,
-	hidden = true,
+    direction = "vertical",
+    size = 60,
+    hidden = true,
 })
 vim.keymap.set("n", "<leader>tv", function()
-	vert_term:toggle()
+    vert_term:toggle()
 end, { desc = "Toggle vertical terminal" })
 
 -- Horizontal split terminal
 local hori_term = Terminal:new({
-	direction = "horizontal",
-	size = 15,
-	hidden = true,
+    direction = "horizontal",
+    size = 15,
+    hidden = true,
 })
 vim.keymap.set("n", "<leader>th", function()
-	hori_term:toggle()
+    hori_term:toggle()
 end, { desc = "Toggle horizontal terminal" })
 
 -- run_cpp
 local Terminal = require("toggleterm.terminal").Terminal
 
 local function run_cpp()
-	vim.cmd("wa") -- Save all files before running
-	local file = vim.fn.expand("%")
+    vim.cmd("wa") -- Save all files before running
+    local file = vim.fn.expand("%")
 
-	local cmd = "/opt/homebrew/bin/gtime -f '[Time] %es\n\n\n' g++ -std=c++20 "
-		.. file
-		.. " -o a.out && ./a.out < stdin.txt"
+    local cmd = "/opt/homebrew/bin/gtime -f '[Time] %es\n\n\n' g++ -std=c++20 "
+        .. file
+        .. " -o a.out && ./a.out < stdin.txt"
 
-	local cpp_term = Terminal:new({
-		cmd = cmd,
-		direction = "float",
-		close_on_exit = false,
-	})
+    local cpp_term = Terminal:new({
+        cmd = cmd,
+        direction = "float",
+        close_on_exit = false,
+    })
 
-	cpp_term:toggle()
+    cpp_term:toggle()
 end
 
 -- run on terminal with stdin and time
