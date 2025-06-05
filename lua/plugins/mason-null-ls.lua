@@ -4,30 +4,41 @@ return {
 	dependencies = {
 		"williamboman/mason.nvim",
 		"nvimtools/none-ls.nvim",
+		"nvim-lua/plenary.nvim",
 	},
 	config = function()
 		local null_ls = require("null-ls")
+		local mason_null_ls = require("mason-null-ls")
 
-		null_ls.setup({})
+		-- format on save
+		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+		null_ls.setup({
+			on_attach = function(client, bufnr)
+				if client.supports_method("textDocument/formatting") then
+					vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						group = augroup,
+						buffer = bufnr,
+						callback = function()
+							vim.lsp.buf.format({ async = false })
+						end,
+					})
+				end
+			end,
+		})
 
-		require("mason-null-ls").setup({
-			automatic_installation = true,
+		-- mason-null-ls
+		mason_null_ls.setup({
 			ensure_installed = {
 				"stylua",
 				"prettier",
 				"clang-format",
+				"cpplint",
+				"eslint_d",
+				"golangci-lint",
+				"stylelint",
 			},
-			handlers = {
-				stylua = function()
-					null_ls.register(null_ls.builtins.formatting.stylua)
-				end,
-				prettier = function()
-					null_ls.register(null_ls.builtins.formatting.prettier)
-				end,
-				clang_format = function()
-					null_ls.register(null_ls.builtins.formatting.clang_format)
-				end,
-			},
+			handlers = {}, -- automatically register handlers for installed tools
 		})
 	end,
 }
