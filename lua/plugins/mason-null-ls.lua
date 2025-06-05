@@ -34,10 +34,11 @@ return {
 				"prettier", -- JS, HTML, CSS formatter
 				"clang-format", -- C/C++ formatter
 				"cpplint", -- C++ linter
-				"eslint_d", -- JS/TS linter
+				"eslint", -- JS/TS linter
 				"golangci-lint", -- Go linter
 				"stylelint", -- CSS linter
-				"goimports", -- Go formatter
+				"markuplint",
+				"stylelint", -- CSS linter
 			},
 			handlers = {}, -- Enable automatic registration of installed sources
 		})
