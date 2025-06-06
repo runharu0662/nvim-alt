@@ -39,6 +39,7 @@ return {
 				"stylelint", -- CSS linter
 				"markuplint",
 				"stylelint", -- CSS linter
+				"goimports", -- Go imports formatter
 			},
 			handlers = {}, -- Enable automatic registration of installed sources
 		})
