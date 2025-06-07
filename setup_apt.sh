@@ -1,3 +1,4 @@
+
 #!/bin/bash
 set -e
 
@@ -23,13 +24,20 @@ export NVIM_APPNAME=nvim-alt
 
 echo "[5/9] Installing Go and gopls..."
 sudo apt install -y golang
-echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.bashrc
-export PATH=$PATH:$(go env GOPATH)/bin
+GOPATH=$(go env GOPATH)
+echo 'export PATH=$PATH:'"$GOPATH"'/bin' >> ~/.bashrc
+export PATH=$PATH:$GOPATH/bin
 go install golang.org/x/tools/gopls@latest
 
 echo "[6/9] Installing clangd, clang-format, and cpplint..."
 sudo apt install -y clangd clang-format python3-pip
-pip3 install --user cpplint
+echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
+export PATH=$PATH:~/.local/bin
+if pip3 install --user cpplint; then
+  echo "✅ cpplint installed."
+else
+  echo "❌ cpplint install failed. Consider using clang-tidy as alternative."
+fi
 
 echo "[7/9] Installing Node.js v20 and npm..."
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
