@@ -20,9 +20,9 @@ return {
 				["<Tab>"] = map.confirm({ select = true }),
 			}),
 			sources = {
-				{ name = "nvim_lsp", max_item_count = 15, keyword_length = 2 },
-				{ name = "copilot", max_item_count = 15, keyword_length = 2 },
-				{ name = "buffer", max_item_count = 15, keyword_length = 2 },
+				{ name = "nvim_lsp", max_item_count = 15, keyword_length = 1 },
+				{ name = "copilot", max_item_count = 15, keyword_length = 0 },
+				{ name = "buffer", max_item_count = 15, keyword_length = 1 },
 			},
 			window = {
 				completion = cmp.config.window.bordered(),
