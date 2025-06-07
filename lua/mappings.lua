@@ -13,7 +13,7 @@ vim.api.nvim_create_user_command("CopilotToggle", function()
 	end
 end, {})
 
-vim.keymap.set("n", "<leader>lc", "<cmd>CopilotToggle<CR>", { desc = "Toggle Copilot" })
+vim.keymap.set("n", "<leader>lt", "<cmd>CopilotToggle<CR>", { desc = "Toggle Copilot" })
 
 -- split right
 vim.keymap.set("n", "<leader>v", ":vsplit<CR>", {
