@@ -20,22 +20,9 @@ return {
 				["<Tab>"] = map.confirm({ select = true }),
 			}),
 			sources = {
-				{ name = "copilot", group_index = 1, priority = 1000 },
-				{ name = "nvim_lsp", group_index = 2, priority = 750 },
-				{ name = "buffer", group_index = 2, priority = 500 },
-			},
-			sorting = {
-				priority_weight = 2,
-				comparators = {
-					require("copilot_cmp.comparators").prioritize,
-					cmp.config.compare.offset,
-					cmp.config.compare.exact,
-					cmp.config.compare.score,
-					cmp.config.compare.kind,
-					cmp.config.compare.sort_text,
-					cmp.config.compare.length,
-					cmp.config.compare.order,
-				},
+				{ name = "copilot" },
+				{ name = "nvim_lsp" },
+				{ name = "buffer" },
 			},
 			window = {
 				completion = cmp.config.window.bordered(),
@@ -43,8 +30,16 @@ return {
 			},
 		})
 
-		vim.lsp.config("*", {
-			capabilities = require("cmp_nvim_lsp").default_capabilities(),
+		-- capabilities を取得（cmp 統合用）
+		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+		-- mason-lspconfig で自動セットアップ
+		require("mason-lspconfig").setup_handlers({
+			function(server_name)
+				require("lspconfig")[server_name].setup({
+					capabilities = capabilities,
+				})
+			end,
 		})
 	end,
 }
