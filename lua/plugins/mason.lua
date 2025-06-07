@@ -16,7 +16,6 @@ return {
 				"lua_ls",
 				"pyright",
 				"jsonls",
-				-- "ts_ls",
 				"html",
 				"cssls",
 				"gopls",
