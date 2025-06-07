@@ -20,9 +20,9 @@ return {
 				["<Tab>"] = map.confirm({ select = true }),
 			}),
 			sources = {
-				{ name = "copilot" },
 				{ name = "nvim_lsp" },
 				{ name = "buffer" },
+				{ name = "copilot" },
 			},
 			window = {
 				completion = cmp.config.window.bordered(),
