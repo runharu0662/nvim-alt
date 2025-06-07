@@ -16,7 +16,7 @@ return {
 			mapping = map.preset.insert({
 				["<C-p>"] = map.select_prev_item(),
 				["<C-n>"] = map.select_next_item(),
-				["<CR>"] = map.confirm({ select = true }),
+				["<CR>"] = map.confirm({ select = false }),
 				["<Tab>"] = map.confirm({ select = true }),
 			}),
 			sources = {
@@ -28,18 +28,6 @@ return {
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
 			},
-		})
-
-		-- capabilities を取得（cmp 統合用）
-		local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-		-- mason-lspconfig で自動セットアップ
-		require("mason-lspconfig").setup_handlers({
-			function(server_name)
-				require("lspconfig")[server_name].setup({
-					capabilities = capabilities,
-				})
-			end,
 		})
 	end,
 }
