@@ -30,7 +30,8 @@ export PATH=$PATH:$GOPATH/bin
 go install golang.org/x/tools/gopls@latest
 
 echo "[6/9] Installing clangd, clang-format, and cpplint..."
-sudo apt install -y clangd clang-format python3-pip
+sudo apt install -y clangd clang-format python3.12-venv
+
 echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
 export PATH=$PATH:~/.local/bin
 if pip3 install --user cpplint; then
