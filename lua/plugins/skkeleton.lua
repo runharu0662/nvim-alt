@@ -4,7 +4,7 @@ return {
 		dependencies = { "vim-denops/denops.vim" },
 
 		init = function()
-			vim.keymap.set({ "i", "c" }, "<C-Space>", "<Plug>(skkeleton-toggle)", { noremap = false })
+			vim.keymap.set({ "i", "c" }, "<C-s>", "<Plug>(skkeleton-toggle)", { noremap = false })
 		end,
 
 		config = function()
