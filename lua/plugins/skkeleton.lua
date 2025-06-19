@@ -31,25 +31,27 @@ return {
 	{
 		"delphinus/skkeleton_indicator.nvim",
 		config = function()
-			vim.api.nvim_set_hl(0, "SkkeletonIndicatorEiji", { fg = "#7aa2f7", bg = "#1f2335", bold = true })
-			vim.api.nvim_set_hl(0, "SkkeletonIndicatorHira", { fg = "#1f2335", bg = "#9ece6a", bold = true })
-			vim.api.nvim_set_hl(0, "SkkeletonIndicatorKata", { fg = "#1f2335", bg = "#e0af68", bold = true })
-			vim.api.nvim_set_hl(0, "SkkeletonIndicatorHankata", { fg = "#1f2335", bg = "#bb9af7", bold = true })
-			vim.api.nvim_set_hl(0, "SkkeletonIndicatorZenkaku", { fg = "#1f2335", bg = "#7dcfff", bold = true })
-			vim.api.nvim_set_hl(0, "SkkeletonIndicatorAbbrev", { fg = "#1f2335", bg = "#f7768e", bold = true })
+			local bg = "#1a1b26" -- tokyonight-storm の背景
+			local fg = "#7aa2f7" -- 青系
+
+			vim.api.nvim_set_hl(0, "SkkeletonIndicatorEiji", { fg = fg, bg = bg, bold = false })
+			vim.api.nvim_set_hl(0, "SkkeletonIndicatorHira", { fg = "#1a1b26", bg = "#9ece6a", bold = false })
+			vim.api.nvim_set_hl(0, "SkkeletonIndicatorKata", { fg = "#1a1b26", bg = "#e0af68", bold = false })
+			vim.api.nvim_set_hl(0, "SkkeletonIndicatorAbbrev", { fg = "#1a1b26", bg = "#f7768e", bold = false })
 
 			require("skkeleton_indicator").setup({
 				eijiText = "EN",
 				hiraText = "JP",
 				kataText = "KT",
+				abbrevText = "AB",
 				hankataText = "HK",
 				zenkakuText = "ZK",
-				abbrevText = "AB",
-				border = "rounded",
-				row = -1,
-				col = 1,
+				border = nil,
+				row = 1,
+				col = 0,
 				fadeOutMs = 0,
 				alwaysShown = true,
+				zindex = 250,
 			})
 		end,
 	},
