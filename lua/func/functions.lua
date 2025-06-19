@@ -45,3 +45,18 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 		vim.diagnostic.open_float(nil, { focus = false })
 	end,
 })
+
+-- skkeleton 補完無効化
+vim.api.nvim_create_autocmd("User", {
+	pattern = "skkeleton-enable-pre",
+	callback = function()
+		require("cmp").setup.buffer({ enabled = false })
+	end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "skkeleton-disable-pre",
+	callback = function()
+		require("cmp").setup.buffer({ enabled = true })
+	end,
+})
