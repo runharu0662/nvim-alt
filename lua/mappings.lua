@@ -142,4 +142,4 @@ end
 
 vim.keymap.set("n", "<leader>jj", run_cpp, { desc = "Run C++ with stdin and time", silent = true })
 
-vim.keymap.set("n", "<leader>pi", ":PasteImage<CR>", { desc = "Paste dropped image as Markdown" })
+vim.keymap.set("n", "<leader>pi", ":PasteClipboardImage<CR>", { desc = "Paste dropped image as Markdown" })
