@@ -4,7 +4,10 @@ return {
 		dependencies = { "vim-denops/denops.vim" },
 
 		init = function()
-			vim.keymap.set({ "i", "c" }, "<C-;>", "<Plug>(skkeleton-toggle)", { noremap = false })
+			vim.keymap.set({ "i", "c" }, "<C-j>", "<Plug>(skkeleton-toggle)", { noremap = false })
+			vim.keymap.set("i", "<C-k>", function()
+				vim.fn["skkeleton#mode"]("kata")
+			end)
 		end,
 
 		config = function()
@@ -40,18 +43,15 @@ return {
 			vim.api.nvim_set_hl(0, "SkkeletonIndicatorAbbrev", { fg = "#1a1b26", bg = "#f7768e", bold = false })
 
 			require("skkeleton_indicator").setup({
-				eijiText = "EN",
-				hiraText = "JP",
-				kataText = "KT",
-				abbrevText = "AB",
-				hankataText = "HK",
-				zenkakuText = "ZK",
-				border = nil,
+				eijiText = "A",
+				hiraText = "あ",
+				kataText = "ア",
+				border = "rounded",
 				row = 1,
 				col = 0,
 				fadeOutMs = 0,
 				alwaysShown = true,
-				zindex = 250,
+				zindex = 999,
 			})
 		end,
 	},
