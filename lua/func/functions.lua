@@ -45,3 +45,27 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 		vim.diagnostic.open_float(nil, { focus = false })
 	end,
 })
+
+-- paste image
+vim.api.nvim_create_user_command("PasteClipboardImage", function()
+	local filename = os.date("%Y-%m-%d_%H-%M-%S") .. ".png"
+
+	-- $HOME を expand() で取得
+	local home = vim.fn.expand("~")
+
+	-- 保存パスを固定で指定
+	local vault_path = home
+		.. "/Documents/Latest_Documents/Obsidian_Vaults/obsidian-vault1/Obsidian_Vault1/screen_shots"
+	local full_path = vault_path .. "/" .. filename
+
+	vim.fn.mkdir(vault_path, "p")
+	local result = vim.fn.system({ "pngpaste", full_path })
+
+	if vim.v.shell_error == 0 then
+		local markdown = string.format("![image](screen_shots/%s)", filename)
+		vim.fn.append(vim.fn.line("."), markdown)
+		print("✅ Image saved: " .. filename)
+	else
+		print("❌ Failed to paste image from clipboard.")
+	end
+end, {})
