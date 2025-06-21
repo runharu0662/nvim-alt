@@ -45,3 +45,10 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 		vim.diagnostic.open_float(nil, { focus = false })
 	end,
 })
+
+vim.api.nvim_create_user_command("PasteImage", function()
+	local line = vim.fn.getline(".") -- 現在行（画像パス）
+	local cmd = { "~/.local/bin/paste-image.sh", line }
+	local result = vim.fn.system(cmd)
+	vim.fn.setline(".", vim.fn.trim(result))
+end, {})
