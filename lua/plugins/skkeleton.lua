@@ -4,11 +4,7 @@ return {
 		dependencies = { "vim-denops/denops.vim" },
 
 		init = function()
-
 			vim.keymap.set({ "i", "c" }, "<C-j>", "<Plug>(skkeleton-toggle)", { noremap = false })
-			vim.keymap.set("i", "<C-k>", function()
-				vim.fn["skkeleton#mode"]("kata")
-			end)
 		end,
 
 		config = function()
@@ -47,7 +43,7 @@ return {
 				eijiText = "A",
 				hiraText = "あ",
 				kataText = "ア",
-				border = "rounded",
+				border = nil,
 				row = 1,
 				col = 0,
 				fadeOutMs = 0,
