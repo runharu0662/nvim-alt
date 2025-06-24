@@ -9,7 +9,7 @@ end
 local icons = require("user.icons")
 
 vim.diagnostic.config({
-	virtual_text = false,
+	virtual_text = true,
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = icons.error_icon,
