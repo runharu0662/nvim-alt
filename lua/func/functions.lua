@@ -5,7 +5,7 @@ vim.api.nvim_create_user_command("RunInput", function()
 	vim.fn.writefile({}, path)
 
 	vim.cmd("split " .. path)
-	vim.cmd("resize 10") -- 高さを10行に調整（お好みで）
+	vim.cmd("resize 10") -- height of the split
 end, {})
 
 -- Insert cpp template
@@ -47,10 +47,9 @@ vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 vim.api.nvim_create_user_command("PasteClipboardImage", function()
 	local filename = os.date("%Y-%m-%d_%H-%M-%S") .. ".png"
 
-	-- $HOME を expand() で取得
 	local home = vim.fn.expand("~")
 
-	-- 保存パスを固定で指定
+	-- change your vault path accordingly
 	local vault_path = home
 		.. "/Documents/Latest_Documents/Obsidian_Vaults/obsidian-vault1/Obsidian_Vault1/screen_shots"
 	local full_path = vault_path .. "/" .. filename

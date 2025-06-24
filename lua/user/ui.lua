@@ -2,21 +2,22 @@ local icons = require("user.icons")
 
 local signs = { Error = icons.error_icon, Warn = icons.warn_icon, Hint = icons.hint_icon, Info = icons.info_icon }
 for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
 local icons = require("user.icons")
 
 vim.diagnostic.config({
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = icons.error_icon,
-            [vim.diagnostic.severity.WARN] = icons.warn_icon,
-            [vim.diagnostic.severity.HINT] = icons.hint_icon,
-            [vim.diagnostic.severity.INFO] = icons.info_icon,
-        },
-    },
+	virtual_text = false,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = icons.error_icon,
+			[vim.diagnostic.severity.WARN] = icons.warn_icon,
+			[vim.diagnostic.severity.HINT] = icons.hint_icon,
+			[vim.diagnostic.severity.INFO] = icons.info_icon,
+		},
+	},
 })
 
 local hl = vim.api.nvim_set_hl
@@ -49,24 +50,23 @@ hl(0, "NeoTreeEndOfBuffer", none)
 hl(0, "NeoTreeFloatBorder", none)
 hl(0, "NeoTreeWinSeparator", none)
 
--- 透明が必要そうなもの
 hl(0, "VertSplit", none)
 hl(0, "TabLineFill", none)
 hl(0, "TabLine", none)
 hl(0, "TabLineSel", none)
 
--- WinBar本体を透過
 hl(0, "WinBar", none)
 hl(0, "WinBarNC", none)
 
--- Lspsagaが使うWinbarがあればそれも（例：lspsagaのbreadcrumbs用）
 hl(0, "SagaWinbar", none)
 
--- terminalの背景を透過
 local none = { bg = "none" }
 
 vim.api.nvim_set_hl(0, "Normal", none)
 vim.api.nvim_set_hl(0, "NormalNC", none)
-vim.api.nvim_set_hl(0, "TermNormal", none)   -- split terminal 用
-vim.api.nvim_set_hl(0, "TermNormalNC", none) -- 非アクティブ時用（必要なら）
+vim.api.nvim_set_hl(0, "TermNormal", none) -- for splitting terminal
+vim.api.nvim_set_hl(0, "TermNormalNC", none)
 vim.api.nvim_set_hl(0, "EndOfBuffer", none)
+
+-- change comment color
+vim.api.nvim_set_hl(0, "Comment", { fg = "#9ec6ff", italic = true })
