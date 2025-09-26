@@ -33,3 +33,9 @@ require("lazy").setup({
 	-- automatically check for plugin updates
 	checker = { enabled = true },
 })
+
+require("mappings")
+require("func.functions")
+require("options")
+vim.cmd([[colorscheme tokyonight-storm]])
+require("user.ui")
