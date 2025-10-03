@@ -62,3 +62,72 @@ vim.api.nvim_create_user_command("PasteClipboardImage", function()
 		print("❌ Failed to paste image from clipboard.")
 	end
 end, {})
+
+-- Helper: Extract the [[filename]] under the cursor
+local function get_link_under_cursor()
+	local line = vim.api.nvim_get_current_line()
+	local col = vim.fn.col(".") - 1
+	local start, finish = nil, nil
+
+	-- Search for [[...]] pattern in the current line
+	for s, e in line:gmatch("()%[%[.-%]%]()", 1) do
+		if col >= s and col <= e then
+			start = s
+			finish = e - 3 -- exclude the final closing bracket (]])
+			break
+		end
+	end
+
+	if not start then
+		return nil
+	end
+
+	local name = line:sub(start + 2, finish) -- remove opening brackets ([[)
+	return name ~= "" and name or nil
+end
+
+-- Helper: Get the full .md file path in the current buffer's directory
+local function get_md_file_path(filename)
+	local dir = vim.fn.expand("%:p:h")
+	return dir .. "/" .. filename .. ".md"
+end
+
+-- Create a markdown file if it does not already exist, then open it
+local function create_md_link()
+	local filename = get_link_under_cursor()
+	if not filename then
+		vim.notify("No [[filename]] under cursor.", vim.log.levels.WARN)
+		return
+	end
+
+	local path = get_md_file_path(filename)
+	if vim.fn.filereadable(path) == 1 then
+		vim.notify("File already exists: " .. path, vim.log.levels.INFO)
+		return
+	end
+
+	vim.fn.writefile({}, path) -- create empty file
+	vim.notify("Markdown file created: " .. path, vim.log.levels.INFO)
+	vim.cmd("edit " .. path)
+end
+
+-- Open an existing markdown file based on the [[filename]] under cursor
+local function open_md_link()
+	local filename = get_link_under_cursor()
+	if not filename then
+		vim.notify("No [[filename]] under cursor.", vim.log.levels.WARN)
+		return
+	end
+
+	local path = get_md_file_path(filename)
+	if vim.fn.filereadable(path) == 0 then
+		vim.notify("Markdown file not found: " .. path, vim.log.levels.ERROR)
+		return
+	end
+
+	vim.cmd("edit " .. path)
+end
+
+-- Create user commands :CreateMdLink and :OpenMdLink
+vim.api.nvim_create_user_command("CreateMdLink", create_md_link, {})
+vim.api.nvim_create_user_command("OpenMdLink", open_md_link, {})

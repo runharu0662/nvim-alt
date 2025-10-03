@@ -15,6 +15,13 @@ return {
 					prev = "<M-p>", -- 前の候補     (Option+p)
 					dismiss = "<C-x>", -- 候補を閉じる
 				},
+
+			panel = {
+				enabled = true,
+			},
+
+			filetypes = {
+				["*"] = true,
 			},
 			panel = { enabled = true },
 			filetypes = { ["*"] = true },

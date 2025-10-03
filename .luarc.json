@@ -1,5 +1,9 @@
 {
-    "diagnostics.disable": [
-        "redefined-local"
-    ]
+    "Lua": {
+        "diagnostics": {
+            "globals": [
+                "vim"
+            ]
+        }
+    }
 }
