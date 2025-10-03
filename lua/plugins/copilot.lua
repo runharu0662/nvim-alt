@@ -6,7 +6,7 @@ return {
 		require("copilot").setup({
 			suggestion = {
 				enabled = true,
-				auto_trigger = false, -- 自動ポップ無効
+				auto_trigger = true,
 				keymap = {
 					accept = "<C-l>", -- 候補を確定
 					accept_word = "<M-;>", -- 単語だけ確定
@@ -19,10 +19,5 @@ return {
 			panel = { enabled = true },
 			filetypes = { ["*"] = true },
 		})
-
-		-- 手動トリガー
-		vim.keymap.set("i", "<M-.>", function()
-			require("copilot.suggestion").trigger()
-		end, { desc = "Copilot: Trigger suggestion" })
 	end,
 }
