@@ -6,46 +6,23 @@ return {
 		require("copilot").setup({
 			suggestion = {
 				enabled = true,
-				auto_trigger = false, -- trueにすると自動で候補が出る
+				auto_trigger = false, -- 自動ポップ無効（手動トリガで使う）
+				keymap = {
+					accept = "<C-l>", -- 候補を確定
+					accept_word = "<M-;>", -- 単語だけ確定 (Option+;)
+					accept_line = "<M-'>", -- 行だけ確定   (Option+')
+					next = "<M-n>", -- 次の候補     (Option+n)
+					prev = "<M-p>", -- 前の候補     (Option+p)
+					dismiss = "<C-x>", -- 候補を閉じる
+				},
 			},
-			panel = {
-				enabled = true,
-			},
-			filetypes = {
-				["*"] = true, -- すべてのファイルタイプで有効
-			},
+			panel = { enabled = true },
+			filetypes = { ["*"] = true },
 		})
 
-		-- Copilot suggestion 操作用キーマップ
-		local s = require("copilot.suggestion")
-
-		-- 候補をすべて受け入れる
-		vim.keymap.set("i", "<C-l>", function()
-			s.accept()
-		end, { desc = "Copilot: Accept" })
-
-		-- 単語だけ受け入れる
-		vim.keymap.set("i", "<C-;>", function()
-			s.accept_word()
-		end, { desc = "Copilot: Accept Word" })
-
-		-- 行だけ受け入れる
-		vim.keymap.set("i", "<C-'>", function()
-			s.accept_line()
-		end, { desc = "Copilot: Accept Line" })
-
-		-- 複数候補がある場合の切り替え
-		vim.keymap.set("i", "<C-]>", function()
-			s.next()
-		end, { desc = "Copilot: Next Suggestion" })
-
-		vim.keymap.set("i", "<C-[>", function()
-			s.prev()
-		end, { desc = "Copilot: Previous Suggestion" })
-
-		-- 候補を閉じる
-		vim.keymap.set("i", "<C-x>", function()
-			s.dismiss()
-		end, { desc = "Copilot: Dismiss" })
+		-- 手動トリガー（候補を出す）
+		vim.keymap.set("i", "<M-.>", function()
+			require("copilot.suggestion").trigger()
+		end, { desc = "Copilot: Trigger suggestion" })
 	end,
 }
