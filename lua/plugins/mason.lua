@@ -27,14 +27,13 @@ return {
 
 		local lspconfig = require("lspconfig")
 
-		lspconfig.lua_ls.setup({})
-		lspconfig.pyright.setup({})
-		lspconfig.jsonls.setup({})
-		lspconfig.html.setup({})
-		lspconfig.cssls.setup({})
-		lspconfig.gopls.setup({})
-		lspconfig.bashls.setup({})
-		lspconfig.yamlls.setup({})
-		lspconfig.rust_analyzer.setup({})
+		-- lspconfig.pyright.setup({})
+		-- lspconfig.jsonls.setup({})
+		-- lspconfig.html.setup({})
+		-- lspconfig.cssls.setup({})
+		-- lspconfig.gopls.setup({})
+		-- lspconfig.bashls.setup({})
+		-- lspconfig.yamlls.setup({})
+		-- lspconfig.rust_analyzer.setup({})
 	end,
 }

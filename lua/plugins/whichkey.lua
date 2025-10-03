@@ -25,6 +25,7 @@ return {
 			{ "<leader>r", group = "rename" },
 			{ "<leader>c", group = "code action" },
 			-- { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
+			{ "<lendder>p", group = "obsidian" },
 			{
 				"<leader>b",
 				group = "buffers",

@@ -3,7 +3,6 @@ return {
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
-		"zbirenbaum/copilot-cmp",
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -21,8 +20,9 @@ return {
 			}),
 			sources = {
 				{ name = "nvim_lsp", max_item_count = 15, keyword_length = 1 },
-				{ name = "copilot", max_item_count = 15, keyword_length = 0 },
+				-- { name = "copilot", max_item_count = 15, keyword_length = 0 },
 				{ name = "buffer", max_item_count = 15, keyword_length = 1 },
+				{ name = "render-markdown" },
 			},
 			window = {
 				completion = cmp.config.window.bordered(),
