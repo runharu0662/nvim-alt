@@ -11,7 +11,7 @@ return {
 					accept = "<C-l>", -- 候補を確定
 					next = "<M-n>", -- 次の候補
 					prev = "<M-p>", -- 前の候補
-					dismiss = "<C-]>", -- 候補をキャンセル
+					dismiss = "<C-]>",
 				},
 			},
 			panel = { enabled = true },
