@@ -6,7 +6,7 @@ return {
 		require("copilot").setup({
 			suggestion = {
 				enabled = true,
-				auto_trigger = true, 
+				auto_trigger = true,
 				keymap = {
 					accept = "<C-l>", -- 候補を確定
 					next = "<M-n>", -- 次の候補
