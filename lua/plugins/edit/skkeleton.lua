@@ -1,3 +1,4 @@
+-- this is for japanese input
 return {
 	{
 		"vim-skk/skkeleton",

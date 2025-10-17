@@ -2,6 +2,7 @@ return {
 	"williamboman/mason.nvim",
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
 	},
 	config = function()
 		require("mason").setup({
@@ -25,15 +26,19 @@ return {
 			},
 		})
 
-		local lspconfig = require("lspconfig")
+		--------------------------
+		-- new lspconfig setup
+		local lsp = vim.lsp.config
+		-------------------------
 
-		-- lspconfig.pyright.setup({})
-		-- lspconfig.jsonls.setup({})
-		-- lspconfig.html.setup({})
-		-- lspconfig.cssls.setup({})
-		-- lspconfig.gopls.setup({})
-		-- lspconfig.bashls.setup({})
-		-- lspconfig.yamlls.setup({})
-		-- lspconfig.rust_analyzer.setup({})
+		lsp.lua_ls.setup({})
+		lsp.pyright.setup({})
+		lsp.jsonls.setup({})
+		lsp.html.setup({})
+		lsp.cssls.setup({})
+		lsp.gopls.setup({})
+		lsp.bashls.setup({})
+		lsp.yamlls.setup({})
+		lsp.rust_analyzer.setup({})
 	end,
 }
