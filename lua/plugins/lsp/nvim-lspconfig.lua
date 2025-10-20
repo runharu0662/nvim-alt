@@ -2,8 +2,8 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
-		local lsp = vim.lsp and vim.lsp.config
-		if not lsp then
+		local lspconfig = require("lspconfig")
+		if not lspconfig then
 			return
 		end -- 念のため
 
@@ -28,7 +28,7 @@ return {
 		}
 
 		for name, opts in pairs(servers) do
-			lsp[name].setup(opts) -- 新APIのみ
+			lspconfig[name].setup(opts)
 		end
 	end,
 }
