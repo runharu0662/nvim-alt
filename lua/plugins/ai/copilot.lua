@@ -1,21 +1,22 @@
+-- ~/.config/nvim-alt/lua/plugins/ai/copilot.lua
 return {
 	"zbirenbaum/copilot.lua",
-	cmd = "Copilot",
-	event = "InsertEnter",
-	config = function()
-		require("copilot").setup({
-			suggestion = {
-				enabled = true,
-				auto_trigger = true,
-				keymap = {
-					accept = "<C-l>", -- 候補を確定
-					next = "<M-n>", -- 次の候補
-					prev = "<M-p>", -- 前の候補
-					dismiss = "<C-]>",
-				},
+	cmd = "Copilot", -- :Copilot で遅延ロード
+	event = "InsertEnter", -- 挿入モードで自動ロード
+	opts = {
+		suggestion = {
+			enabled = true,
+			auto_trigger = true,
+			keymap = {
+				accept = "<C-l>",
+				accept_word = "<C-;>",
+				accept_line = "<C-'>",
+				next = "<C-]>",
+				prev = "<C-[>",
+				dismiss = "<C-x>",
 			},
-			panel = { enabled = true },
-			filetypes = { ["*"] = true },
-		})
-	end,
+		},
+		panel = { enabled = false },
+		filetypes = { ["*"] = true },
+	},
 }
