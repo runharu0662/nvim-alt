@@ -1,15 +1,16 @@
---copilot
 vim.api.nvim_create_user_command("CopilotToggle", function()
-	local copilot = require("copilot.suggestion")
-	if copilot.is_visible() then
-		copilot.dismiss()
-		print("Copilot: suggestion dismissed")
-	elseif require("copilot.client").is_disabled() then
+	local ok, copilot = pcall(require, "copilot.api")
+	if not ok then
+		vim.notify("Copilot is not loaded yet", vim.log.levels.WARN)
+		return
+	end
+
+	if copilot.is_disabled() then
 		vim.cmd("Copilot enable")
-		print("Copilot: enabled")
+		vim.notify("Copilot: enabled")
 	else
 		vim.cmd("Copilot disable")
-		print("Copilot: disabled")
+		vim.notify("Copilot: disabled")
 	end
 end, {})
 vim.keymap.set("n", "<leader>lt", "<cmd>CopilotToggle<CR>", { desc = "Toggle Copilot" })
