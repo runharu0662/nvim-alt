@@ -11,8 +11,6 @@ return {
 				accept = "<C-l>",
 				accept_word = "<C-;>",
 				accept_line = "<C-'>",
-				next = "<C-]>",
-				prev = "<C-[>",
 				dismiss = "<C-x>",
 			},
 		},
