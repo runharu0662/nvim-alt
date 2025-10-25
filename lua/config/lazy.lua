@@ -32,10 +32,14 @@ require("lazy").setup({
 	install = { colorscheme = { "habamax" } },
 	-- automatically check for plugin updates
 	checker = { enabled = true },
+	ui = {
+		-- 'rounded'、'single'、'double'、'shadow'、または独自のテーブルを指定可能
+		border = "rounded",
+	},
 })
 
 require("mappings")
 require("func.functions")
 require("options")
-vim.cmd([[colorscheme tokyonight-storm]])
+vim.cmd([[colorscheme tokyonight-night]])
 require("user.ui")

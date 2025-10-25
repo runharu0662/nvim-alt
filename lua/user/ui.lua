@@ -25,9 +25,5 @@ vim.diagnostic.config({
 	},
 })
 
--- ===== ここから背景設定修正版 =====
--- 背景を透過していた箇所を削除しました。
--- colorscheme の設定が反映されるようになります。
-
--- コメント色の調整はそのまま残しています。
+-- comment style
 vim.api.nvim_set_hl(0, "Comment", { fg = "#9ec6ff", italic = true })
