@@ -8,7 +8,7 @@ end, {})
 
 -- ========= InsTemp: insert template from file =========
 vim.api.nvim_create_user_command("InsTemp", function()
-	local template_path = vim.fn.expand("~/.config/nvim-alt/template/base.cpp") -- ~ を展開
+	local template_path = vim.fn.stdpath('config') .. "/template/base.cpp" -- ~ を展開
 	if vim.fn.filereadable(template_path) == 1 then
 		vim.cmd("0r " .. vim.fn.fnameescape(template_path))
 	else
@@ -43,7 +43,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- ========= PasteClipboardImage: save clipboard image to vault and insert markdown link =========
 vim.api.nvim_create_user_command("PasteClipboardImage", function()
 	local filename = os.date("%Y-%m-%d_%H-%M-%S") .. ".png"
-	local dir = VAULT .. "/screen_shots"
+	if not vim.g.obsidian_vault_path or vim.g.obsidian_vault_path == "" then
+			vim.notify("Obsidian vault path is not set. Please set vim.g.obsidian_vault_path in your init.lua.", vim.log.levels.ERROR)
+			return
+		end
+		local dir = vim.g.obsidian_vault_path .. "/screen_shots"
 	local full_path = dir .. "/" .. filename
 
 	vim.fn.mkdir(dir, "p")
