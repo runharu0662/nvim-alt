@@ -8,7 +8,7 @@ end, {})
 
 -- ========= InsTemp: insert template from file =========
 vim.api.nvim_create_user_command("InsTemp", function()
-	local template_path = vim.fn.stdpath('config') .. "/template/base.cpp" -- ~ を展開
+	local template_path = vim.fn.stdpath("config") .. "/template/base.cpp"
 	if vim.fn.filereadable(template_path) == 1 then
 		vim.cmd("0r " .. vim.fn.fnameescape(template_path))
 	else
@@ -44,10 +44,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_user_command("PasteClipboardImage", function()
 	local filename = os.date("%Y-%m-%d_%H-%M-%S") .. ".png"
 	if not vim.g.obsidian_vault_path or vim.g.obsidian_vault_path == "" then
-			vim.notify("Obsidian vault path is not set. Please set vim.g.obsidian_vault_path in your init.lua.", vim.log.levels.ERROR)
-			return
-		end
-		local dir = vim.g.obsidian_vault_path .. "/screen_shots"
+		vim.notify(
+			"Obsidian vault path is not set. Please set vim.g.obsidian_vault_path in your init.lua.",
+			vim.log.levels.ERROR
+		)
+		return
+	end
+	local dir = vim.g.obsidian_vault_path .. "/screen_shots"
 	local full_path = dir .. "/" .. filename
 
 	vim.fn.mkdir(dir, "p")
@@ -130,6 +133,3 @@ end
 -- Create user commands :CreateMdLink and :OpenMdLink
 vim.api.nvim_create_user_command("CreateMdLink", create_md_link, {})
 vim.api.nvim_create_user_command("OpenMdLink", open_md_link, {})
-
--- ========= Vault route =========
-local VAULT = vim.fn.expand("~/Documents/Latest_Documents/Obsidian_Vaults/obsidian-vault1/Obsidian_Vault1")
