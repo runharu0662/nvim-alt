@@ -1,18 +1,16 @@
 #!/bin/bash
 set -e
 
-echo "[1/9] Updating APT packages..."
+# This script sets up the basic environment for the Neovim configuration on Debian/Ubuntu.
+# Development tools like LSPs, linters, and formatters are managed by `mason.nvim` automatically.
+
+echo "[1/5] Updating APT packages..."
 sudo apt update && sudo apt upgrade -y
 
-echo "[2/9] Installing essential tools (curl, unzip, git)..."
+echo "[2/5] Installing essential tools (curl, unzip, git)..."
 sudo apt install -y curl unzip git software-properties-common
 
-echo "[3/9] Installing ripgrep and fd (for Telescope)..."
-sudo apt install -y ripgrep fd-find
-echo 'alias fd=fdfind' >> ~/.bashrc
-alias fd=fdfind
-
-echo "[4/9] Installing Neovim (latest via PPA)..."
+echo "[3/5] Installing Neovim (latest via PPA)..."
 sudo add-apt-repository -y ppa:neovim-ppa/unstable
 sudo apt update
 sudo apt install -y neovim
@@ -21,29 +19,20 @@ sudo apt install -y neovim
 echo 'export NVIM_APPNAME=nvim-alt' >> ~/.bashrc
 export NVIM_APPNAME=nvim-alt
 
-echo "[5/9] Installing Go and gopls..."
-sudo apt install -y golang
-GOPATH=$(go env GOPATH)
-echo 'export PATH=$PATH:'"$GOPATH"'/bin' >> ~/.bashrc
-export PATH=$PATH:$GOPATH/bin
-go install golang.org/x/tools/gopls@latest
-
-echo "[6/9] Installing clangd, clang-format, and cpplint..."
-sudo apt install -y clangd clang-format python3.12-venv
-
-echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
-export PATH=$PATH:~/.local/bin
-if pip3 install --user cpplint; then
-  echo "✅ cpplint installed."
-else
-  echo "❌ cpplint install failed. Consider using clang-tidy as alternative."
-fi
-
-echo "[7/9] Installing Node.js v20 and npm..."
+echo "[4/5] Installing language runtimes (Go, Node.js, Python)..."
+# Go, Node.js, and Python are required for some LSPs and tools.
+# The specific tools (gopls, tsserver, pyright, cpplint etc.) will be installed by mason.nvim.
+sudo apt install -y golang python3.12-venv
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
 
-echo "[8/9] Nerd Font (JetBrainsMono) installation (optional)..."
+# Add Go and user-local binaries to PATH
+GOPATH=$(go env GOPATH)
+echo 'export PATH=$PATH:'"$GOPATH"'/bin' >> ~/.bashrc
+echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
+export PATH=$PATH:$GOPATH/bin:~/.local/bin
+
+echo "[5/5] Nerd Font (JetBrainsMono) installation (optional)..."
 read -p "👉 Install Nerd Font for terminal icons? (y/N): " install_font
 
 if [[ "$install_font" =~ ^[Yy]$ ]]; then
@@ -66,6 +55,6 @@ else
   echo "🚫 Skipping Nerd Font installation."
 fi
 
-echo "[9/9] Setup complete ✅"
+echo "Setup complete ✅"
 echo "👉 Restart your shell or run: source ~/.bashrc"
-
+echo "👉 Open Neovim and run :Mason to see the tools being installed automatically."
