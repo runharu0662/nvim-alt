@@ -4,7 +4,9 @@ return {
 		"echasnovski/mini.icons",
 		"nvim-lua/plenary.nvim",
 	},
-	config = function()
-		require("alpha").setup(require("alpha.themes.theta").config)
+	opts = function()
+		local dashboard = require("alpha.themes.dashboard")
+		dashboard.section.header.val = require("ascii").art.text.neovim.sharp
+		return dashboard.opts
 	end,
 }
