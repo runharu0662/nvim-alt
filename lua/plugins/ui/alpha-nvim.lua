@@ -15,7 +15,6 @@ return {
 		end
 
 		dashboard.section.buttons.val = {
-			dashboard.button("o", " " .. " Oil", ":Oil --float<cr>"),
 			dashboard.button("f", " " .. " Find file", "<cmd> Telescope find_files <cr>"),
 			dashboard.button("i", " " .. " New file", "<cmd> ene <BAR> startinsert <cr>"),
 			dashboard.button("t", " " .. " Edit temp file", "<cmd> EditTempFile <cr>"),
