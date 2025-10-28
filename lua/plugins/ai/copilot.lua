@@ -1,8 +1,8 @@
 -- ~/.config/nvim-alt/lua/plugins/ai/copilot.lua
 return {
 	"zbirenbaum/copilot.lua",
-	cmd = "Copilot", -- :Copilot で遅延ロード
-	event = "InsertEnter", -- 挿入モードで自動ロード
+	cmd = "Copilot",
+	event = "InsertEnter",
 	opts = {
 		suggestion = {
 			enabled = true,
