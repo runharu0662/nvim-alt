@@ -29,11 +29,11 @@ require("lazy").setup({
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "habamax" } },
+	-- install = { colorscheme = { "habamax" } },
 	-- automatically check for plugin updates
 	checker = { enabled = true },
 	ui = {
-		-- 'rounded'、'single'、'double'、'shadow'、または独自のテーブルを指定可能
+		-- 'rounded'、'single'、'double'、'shadow'
 		border = "rounded",
 	},
 })
