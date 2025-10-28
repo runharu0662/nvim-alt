@@ -15,6 +15,11 @@ return {
 
 		mason.setup({
 			ui = { border = "single", check_outdated_packages_on_open = false },
+			ensure_installed = {
+				-- for telescope
+				"ripgrep",
+				"fd",
+			},
 		})
 
 		local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
