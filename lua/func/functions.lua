@@ -1,15 +1,12 @@
--- ========= Vault ルート（1か所だけで管理） =========
-local VAULT = vim.fn.expand("~/Documents/Latest_Documents/Obsidian_Vaults/obsidian-vault1/Obsidian_Vault1")
-
--- ========= RunInput：CWD に stdin.txt を作って下に開く =========
+-- ========= RunInput： create/open stdin.txt for input =========
 vim.api.nvim_create_user_command("RunInput", function()
 	local path = vim.fn.getcwd() .. "/stdin.txt"
-	vim.fn.writefile({}, path) -- 空で作成/上書き
-	vim.cmd("split " .. vim.fn.fnameescape(path)) -- パスをエスケープ
+	vim.fn.writefile({}, path)
+	vim.cmd("split " .. vim.fn.fnameescape(path))
 	vim.cmd("resize 10")
 end, {})
 
--- ========= InsTemp：テンプレを現在バッファ先頭へ挿入 =========
+-- ========= InsTemp: insert template from file =========
 vim.api.nvim_create_user_command("InsTemp", function()
 	local template_path = vim.fn.expand("~/.config/nvim-alt/template/base.cpp") -- ~ を展開
 	if vim.fn.filereadable(template_path) == 1 then
@@ -19,7 +16,7 @@ vim.api.nvim_create_user_command("InsTemp", function()
 	end
 end, {})
 
--- ========= Diagnostics：CursorHold で浮動ウィンドウ表示（重複防止） =========
+-- ========= Diagnostics: show floating diagnostic on CursorHold =========
 vim.opt.updatetime = 500
 
 local diag_group = vim.api.nvim_create_augroup("runharu_diag_float", { clear = true })
@@ -32,7 +29,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			return
 		end
 
-		-- バッファ専用の CursorHold（再読込時も重複しない）
 		local buf_group = vim.api.nvim_create_augroup("runharu_diag_float_" .. buf, { clear = true })
 		vim.api.nvim_create_autocmd("CursorHold", {
 			group = buf_group,
@@ -43,9 +39,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		})
 	end,
 })
--- ※ 以前のグローバルな CursorHold/CursorHoldI は削除（重複発火の原因）
 
--- ========= PasteClipboardImage：画像を VAULT/screen_shots へ保存してリンク挿入 =========
+-- ========= PasteClipboardImage: save clipboard image to vault and insert markdown link =========
 vim.api.nvim_create_user_command("PasteClipboardImage", function()
 	local filename = os.date("%Y-%m-%d_%H-%M-%S") .. ".png"
 	local dir = VAULT .. "/screen_shots"
@@ -131,3 +126,6 @@ end
 -- Create user commands :CreateMdLink and :OpenMdLink
 vim.api.nvim_create_user_command("CreateMdLink", create_md_link, {})
 vim.api.nvim_create_user_command("OpenMdLink", open_md_link, {})
+
+-- ========= Vault route =========
+local VAULT = vim.fn.expand("~/Documents/Latest_Documents/Obsidian_Vaults/obsidian-vault1/Obsidian_Vault1")
