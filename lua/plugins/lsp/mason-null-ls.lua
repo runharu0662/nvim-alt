@@ -1,47 +1,45 @@
 return {
-	"jay-babu/mason-null-ls.nvim",
-	lazy = false, -- Load immediately; no need for event-based lazy loading
+	"williamboman/mason.nvim",
 	dependencies = {
-		"williamboman/mason.nvim",
-		"nvimtools/none-ls.nvim",
-		"nvim-lua/plenary.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
 	},
+	build = ":MasonUpdate",
+	event = { "BufReadPre", "BufNewFile" },
 	config = function()
-		local null_ls = require("null-ls")
-		local mason_null_ls = require("mason-null-ls")
+		local mason_ok, mason = pcall(require, "mason")
+		if not mason_ok then
+			vim.notify("mason.nvim not found", vim.log.levels.ERROR)
+			return
+		end
 
-		-- Format on save setup
-		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-		null_ls.setup({
-			on_attach = function(client, bufnr)
-				if client.supports_method("textDocument/formatting") then
-					vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-					vim.api.nvim_create_autocmd("BufWritePre", {
-						group = augroup,
-						buffer = bufnr,
-						callback = function()
-							vim.lsp.buf.format({ async = false })
-						end,
-					})
-				end
-			end,
+		mason.setup({
+			ui = {
+				border = "single",
+				check_outdated_packages_on_open = false,
+			},
 		})
 
-		-- Mason-null-ls integration: auto-install and auto-register tools
-		mason_null_ls.setup({
+		local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
+		if not mason_lsp_ok then
+			vim.notify("mason-lspconfig not found", vim.log.levels.ERROR)
+			return
+		end
+
+		mason_lsp.setup({
 			ensure_installed = {
-				"stylua", -- Lua formatter
-				"prettier", -- JS, HTML, CSS formatter
-				"clang-format", -- C/C++ formatter
-				"cpplint", -- C++ linter
-				"eslint", -- JS/TS linter
-				"golangci-lint", -- Go linter
-				"stylelint", -- CSS linter
-				"markuplint",
-				"stylelint", -- CSS linter
-				"goimports", -- Go imports formatter
+				"lua_ls",
+				"pyright",
+				"jsonls",
+				"html",
+				"cssls",
+				"gopls",
+				"bashls",
+				"yamlls",
+				"rust_analyzer",
+				"clangd",
 			},
-			handlers = {}, -- Enable automatic registration of installed sources
+			automatic_installation = true,
 		})
 	end,
 }
