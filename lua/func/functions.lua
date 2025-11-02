@@ -133,3 +133,30 @@ end
 -- Create user commands :CreateMdLink and :OpenMdLink
 vim.api.nvim_create_user_command("CreateMdLink", create_md_link, {})
 vim.api.nvim_create_user_command("OpenMdLink", open_md_link, {})
+
+-- ========= CopilotToggle: toggle GitHub Copilot on/off =========
+vim.api.nvim_create_user_command("CopilotToggle", function()
+  local ok, suggestion = pcall(require, "copilot.suggestion")
+  if not ok then
+    vim.notify("Copilot not loaded", vim.log.levels.WARN)
+    return
+  end
+
+  if vim.g.copilot_enabled == nil then
+    vim.g.copilot_enabled = true
+  end
+
+  if vim.g.copilot_enabled then
+    suggestion.dismiss()
+    vim.g.copilot_enabled = false
+    vim.cmd("Copilot disable")
+    vim.notify(" Copilot disabled", vim.log.levels.INFO)
+  else
+    vim.g.copilot_enabled = true
+    vim.cmd("Copilot enable")
+    vim.notify(" Copilot enabled", vim.log.levels.INFO)
+  end
+end, {})
+
+vim.keymap.set("n", "<leader>lt", "<cmd>CopilotToggle<CR>", { desc = "Toggle Copilot" })
+
