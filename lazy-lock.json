@@ -33,6 +33,6 @@
   "skkeleton_indicator.nvim": { "branch": "v2", "commit": "f08532787cf842b996c8a5065be7e85cd3376c1f" },
   "telescope.nvim": { "branch": "master", "commit": "a0bbec21143c7bc5f8bb02e0005fa0b982edc026" },
   "toggleterm.nvim": { "branch": "main", "commit": "50ea089fc548917cc3cc16b46a8211833b9e3c7c" },
-  "tokyonight.nvim": { "branch": "main", "commit": "b13cfc1286d2aa8bda6ce137b79e857d5a3d5739" },
+  "tokyonight.nvim": { "branch": "main", "commit": "047ace2f6a15600c0784ba16f93b74767f5a5629" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
 }
