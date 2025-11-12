@@ -27,3 +27,9 @@ vim.diagnostic.config({
 
 -- comment style
 vim.api.nvim_set_hl(0, "Comment", { fg = "#9ec6ff", italic = true })
+
+-- lspsaga style
+vim.api.nvim_set_hl(0, "SagaNormal", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "SagaBorder", { bg = "NONE", fg = "#3b4261" }) -- 枠線の色をtokyonightに合わせる
+vim.api.nvim_set_hl(0, "WinBar", { bg = "NONE" })
+vim.api.nvim_set_hl(0, "WinBarNC", { bg = "NONE" })
