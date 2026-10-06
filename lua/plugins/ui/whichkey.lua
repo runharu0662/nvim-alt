@@ -18,14 +18,13 @@ return {
 	config = function()
 		local wk = require("which-key")
 		wk.add({
-			{ "<leader>l", group = "git" }, -- group
+			{ "<leader>l", group = "Copilot" }, -- group
 			{ "<leader>f", group = "telescope" }, -- group
-			{ "<leader>j", group = "cpp_env" }, -- group
 			{ "<leader>h", group = "hop" },
 			{ "<leader>r", group = "rename" },
 			{ "<leader>c", group = "code action" },
 			-- { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
-			{ "<lendder>p", group = "obsidian" },
+			{ "<leader>p", group = "Markdown" },
 			{
 				"<leader>b",
 				group = "buffers",

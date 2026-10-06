@@ -1,21 +1,3 @@
--- ========= RunInput： create/open stdin.txt for input =========
-vim.api.nvim_create_user_command("RunInput", function()
-	local path = vim.fn.getcwd() .. "/stdin.txt"
-	vim.fn.writefile({}, path)
-	vim.cmd("split " .. vim.fn.fnameescape(path))
-	vim.cmd("resize 10")
-end, {})
-
--- ========= InsTemp: insert template from file =========
-vim.api.nvim_create_user_command("InsTemp", function()
-	local template_path = vim.fn.stdpath("config") .. "/template/base.cpp"
-	if vim.fn.filereadable(template_path) == 1 then
-		vim.cmd("0r " .. vim.fn.fnameescape(template_path))
-	else
-		vim.notify("Template not found: " .. template_path, vim.log.levels.WARN)
-	end
-end, {})
-
 -- ========= Diagnostics: show floating diagnostic on CursorHold =========
 vim.opt.updatetime = 500
 
@@ -133,30 +115,3 @@ end
 -- Create user commands :CreateMdLink and :OpenMdLink
 vim.api.nvim_create_user_command("CreateMdLink", create_md_link, {})
 vim.api.nvim_create_user_command("OpenMdLink", open_md_link, {})
-
--- ========= CopilotToggle: toggle GitHub Copilot on/off =========
-vim.api.nvim_create_user_command("CopilotToggle", function()
-  local ok, suggestion = pcall(require, "copilot.suggestion")
-  if not ok then
-    vim.notify("Copilot not loaded", vim.log.levels.WARN)
-    return
-  end
-
-  if vim.g.copilot_enabled == nil then
-    vim.g.copilot_enabled = true
-  end
-
-  if vim.g.copilot_enabled then
-    suggestion.dismiss()
-    vim.g.copilot_enabled = false
-    vim.cmd("Copilot disable")
-    vim.notify(" Copilot disabled", vim.log.levels.INFO)
-  else
-    vim.g.copilot_enabled = true
-    vim.cmd("Copilot enable")
-    vim.notify(" Copilot enabled", vim.log.levels.INFO)
-  end
-end, {})
-
-vim.keymap.set("n", "<leader>lt", "<cmd>CopilotToggle<CR>", { desc = "Toggle Copilot" })
-

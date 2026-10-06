@@ -31,7 +31,7 @@ telescope.load_extension("notify")
 vim.keymap.set("n", "<leader>fn", function()
 	telescope.extensions.notify.notify()
 end, {
-	desc = "Find Nofify Logs",
+	desc = "Find Notify Logs",
 }) -- rename function
 
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol (LSP)" })
@@ -56,30 +56,16 @@ vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live gr
 vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Telescope buffers" })
 vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help tags" })
 
--- nole-ls
+-- LSP formatting
 vim.keymap.set("n", "<leader>n", function()
 	vim.lsp.buf.format({
 		timeout_ms = 200,
 		async = true,
 	})
-end, { desc = "Format with null-ls" })
+end, { desc = "Format with LSP" })
 
 -- close buffer
 vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
-
--- diffview
-vim.keymap.set(
-	"n",
-	"<leader>ld",
-	"<cmd>DiffviewOpen HEAD~1<CR>",
-	{ noremap = true, silent = true, desc = "Open diffview with HEAD~1" }
-)
-vim.keymap.set(
-	"n",
-	"<leader>lf",
-	"<cmd>DiffviewFileHistory %<CR>",
-	{ noremap = true, silent = true, desc = "Open diffview file history" }
-)
 
 -- toggleterm
 local Terminal = require("toggleterm.terminal").Terminal
@@ -116,38 +102,8 @@ vim.keymap.set("n", "<leader>th", function()
 	hori_term:toggle()
 end, { desc = "Toggle horizontal terminal" })
 
--- make_stdin
-vim.keymap.set("n", "<Space>js", ":wa <bar> :RunInput<CR>", { noremap = true, silent = true, desc = "cpp RunInput" })
-vim.keymap.set("n", "<Space>jt", ":InsTemp<CR>", { noremap = true, silent = true, desc = "Insert cpp Template" })
-
--- run_cpp
-local Terminal = require("toggleterm.terminal").Terminal
-
-local function run_cpp()
-	vim.cmd("wa") -- Save all files before running
-	local file = vim.fn.expand("%")
-
-	local cmd = "/opt/homebrew/bin/gtime -f '[Time] %es\n\n\n' g++ -std=c++20 "
-		.. file
-		.. " -o a.out && ./a.out < stdin.txt"
-
-	local cpp_term = Terminal:new({
-		cmd = cmd,
-		direction = "float",
-		close_on_exit = false,
-	})
-
-	cpp_term:toggle()
-end
-
-vim.keymap.set("n", "<leader>jj", run_cpp, { desc = "Run C++ with stdin and time", silent = true })
-
 -- obsidian like
 vim.keymap.set("n", "<leader>pi", ":PasteClipboardImage<CR>", { desc = "Paste dropped image as Markdown" })
-
-vim.keymap.set("n", "<leader>pn", ":ObsidianNew<CR>", { desc = "Obsidian: New note" })
-vim.keymap.set("n", "<leader>pq", ":ObsidianQuickSwitch<CR>", { desc = "Obsidian: Quick switch" })
-vim.keymap.set("n", "<leader>pp", ":ObsidianPasteImg<CR>", { desc = "Obsidian: Paste image" })
 
 vim.keymap.set("n", "<leader>pc", "<cmd>CreateMdLink<CR>", { desc = "Create markdown file from [[link]]" })
 

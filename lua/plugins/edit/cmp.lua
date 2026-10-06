@@ -22,7 +22,6 @@ return {
 				{ name = "nvim_lsp", max_item_count = 15, keyword_length = 1 },
 				-- { name = "copilot", max_item_count = 15, keyword_length = 0 },
 				{ name = "buffer", max_item_count = 15, keyword_length = 1 },
-				{ name = "render-markdown" },
 			},
 			window = {
 				completion = cmp.config.window.bordered(),
