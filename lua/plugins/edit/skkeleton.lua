@@ -25,6 +25,11 @@ return {
 		})
 	end,
 	config = function()
-		vim.keymap.set({ "i", "c" }, "<C-j>", "<Plug>(skkeleton-toggle)", { remap = true, desc = "Toggle Japanese input" })
+		vim.keymap.set(
+			{ "i", "c" },
+			"<C-j>",
+			"<Plug>(skkeleton-toggle)",
+			{ remap = true, desc = "Toggle Japanese input" }
+		)
 	end,
 }

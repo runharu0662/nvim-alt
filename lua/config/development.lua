@@ -27,7 +27,9 @@ function M.executable(command, path)
 			return candidate
 		end
 		local parent = vim.fs.dirname(dir)
-		if parent == dir then break end
+		if parent == dir then
+			break
+		end
 		dir = parent
 	end
 	if vim.fn.executable(command) == 1 then
@@ -49,15 +51,25 @@ function M.setup_lsp()
 		group = vim.api.nvim_create_augroup("web_lsp_navigation", { clear = true }),
 		callback = function(args)
 			local client = vim.lsp.get_client_by_id(args.data.client_id)
-			if not client or client.name == "null-ls" then return end
+			if not client or client.name == "null-ls" then
+				return
+			end
 			for key, fn in pairs({ gd = vim.lsp.buf.definition, gr = vim.lsp.buf.references }) do
 				if vim.fn.maparg(key, "n") == "" then
-					vim.keymap.set("n", key, fn, { buffer = args.buf, desc = key == "gd" and "LSP definition" or "LSP references" })
+					vim.keymap.set(
+						"n",
+						key,
+						fn,
+						{ buffer = args.buf, desc = key == "gd" and "LSP definition" or "LSP references" }
+					)
 				end
 			end
 			if client.name == "gopls" or client.name == "ts_ls" then
 				vim.api.nvim_buf_create_user_command(args.buf, "OrganizeImports", function()
-					vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" }, diagnostics = {} }, apply = true })
+					vim.lsp.buf.code_action({
+						context = { only = { "source.organizeImports" }, diagnostics = {} },
+						apply = true,
+					})
 				end, { desc = "Organize imports through LSP", force = true })
 			end
 		end,
@@ -72,7 +84,9 @@ function M.setup_lsp()
 			end,
 			root_dir = function(bufnr, on_dir)
 				local path = vim.api.nvim_buf_get_name(bufnr)
-				if not M.executable(spec.command, path ~= "" and path or nil) then return end
+				if not M.executable(spec.command, path ~= "" and path or nil) then
+					return
+				end
 				if type(base.root_dir) == "function" then
 					base.root_dir(bufnr, on_dir)
 				else
@@ -89,12 +103,21 @@ end
 
 local formatters = {
 	go = { "goimports", "gofmt" },
-	terraform = { "terraform" }, ["terraform-vars"] = { "terraform" },
-	javascript = { "prettier" }, javascriptreact = { "prettier" },
-	typescript = { "prettier" }, typescriptreact = { "prettier" },
-	html = { "prettier" }, css = { "prettier" }, scss = { "prettier" },
-	json = { "prettier" }, jsonc = { "prettier" }, yaml = { "prettier" },
-	markdown = { "prettier" }, sh = { "shfmt" }, lua = { "stylua" },
+	terraform = { "terraform" },
+	["terraform-vars"] = { "terraform" },
+	javascript = { "prettier" },
+	javascriptreact = { "prettier" },
+	typescript = { "prettier" },
+	typescriptreact = { "prettier" },
+	html = { "prettier" },
+	css = { "prettier" },
+	scss = { "prettier" },
+	json = { "prettier" },
+	jsonc = { "prettier" },
+	yaml = { "prettier" },
+	markdown = { "prettier" },
+	sh = { "shfmt" },
+	lua = { "stylua" },
 }
 
 function M.format(opts)
@@ -105,20 +128,28 @@ function M.format(opts)
 	for _, command in ipairs(formatters[vim.bo[bufnr].filetype] or {}) do
 		if M.executable(command, vim.api.nvim_buf_get_name(bufnr)) then
 			for _, client in ipairs(clients) do
-				if client.name == "null-ls" then chosen = client end
+				if client.name == "null-ls" then
+					chosen = client
+				end
 			end
-			if chosen then break end
+			if chosen then
+				break
+			end
 		end
 	end
 	if not chosen then
 		for _, client in ipairs(clients) do
 			if client.name ~= "null-ls" and client.name ~= "eslint" then
-				if not chosen or client.id < chosen.id then chosen = client end
+				if not chosen or client.id < chosen.id then
+					chosen = client
+				end
 			end
 		end
 	end
 	if not chosen then
-		if not opts.quiet then vim.notify("No formatter available for this buffer", vim.log.levels.INFO) end
+		if not opts.quiet then
+			vim.notify("No formatter available for this buffer", vim.log.levels.INFO)
+		end
 		return
 	end
 	vim.lsp.buf.format({ bufnr = bufnr, id = chosen.id, async = opts.async or false, timeout_ms = 3000 })

@@ -1,14 +1,14 @@
 return {
-    "nvimdev/lspsaga.nvim",
-    dependencies = {
-        "nvim-treesitter/nvim-treesitter", -- optional
-        "nvim-tree/nvim-web-devicons", -- optional
-    },
-    config = function()
-        require("lspsaga").setup({
-            diagnostic = {
-                border = "rounded",
-            },
-        })
-    end,
+	"nvimdev/lspsaga.nvim",
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter", -- optional
+		"nvim-tree/nvim-web-devicons", -- optional
+	},
+	config = function()
+		require("lspsaga").setup({
+			diagnostic = {
+				border = "rounded",
+			},
+		})
+	end,
 }

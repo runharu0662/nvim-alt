@@ -1,3 +1,4 @@
+-- Copilot
 vim.api.nvim_create_user_command("CopilotToggle", function()
 	local ok, copilot = pcall(require, "copilot.api")
 	if not ok then
@@ -15,41 +16,42 @@ vim.api.nvim_create_user_command("CopilotToggle", function()
 end, {})
 vim.keymap.set("n", "<leader>lt", "<cmd>CopilotToggle<CR>", { desc = "Toggle Copilot" })
 
--- split right
+-- Window splits
 vim.keymap.set("n", "<leader>v", ":vsplit<CR>", {
 	noremap = true,
 	silent = true,
 	desc = "Split window vertically (right)",
 })
 
--- lspsaga code_action
+-- LSP code actions
 vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "Code Action" })
 
--- Add notify setting
+-- Notification history
 local telescope = require("telescope")
 telescope.load_extension("notify")
 vim.keymap.set("n", "<leader>fn", function()
 	telescope.extensions.notify.notify()
 end, {
 	desc = "Find Notify Logs",
-}) -- rename function
+})
 
+-- LSP rename
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol (LSP)" })
 
--- change f and F to move to the start and end of the line
+-- Move to the start and end of the line
 vim.keymap.set({ "n", "v" }, "F", "$", { noremap = true })
 vim.keymap.set({ "n", "v" }, "f", "0", { noremap = true })
 
--- move between windows
+-- Move between windows
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to below window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to above window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
 
--- neotree
+-- File tree
 vim.keymap.set("n", "<space>e", "<cmd>Neotree toggle<CR>", { desc = "Neo-tree toggle" })
 
--- telescope
+-- Telescope search
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Telescope find files" })
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Telescope live grep" })
@@ -61,10 +63,10 @@ vim.keymap.set("n", "<leader>n", function()
 	require("config.development").format({ async = true })
 end, { desc = "Format with LSP" })
 
--- close buffer
+-- Close buffer
 vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
 
--- toggleterm
+-- Terminals
 local Terminal = require("toggleterm.terminal").Terminal
 
 -- Float terminal
@@ -99,7 +101,7 @@ vim.keymap.set("n", "<leader>th", function()
 	hori_term:toggle()
 end, { desc = "Toggle horizontal terminal" })
 
--- obsidian like
+-- Markdown links and images
 vim.keymap.set("n", "<leader>pi", ":PasteClipboardImage<CR>", { desc = "Paste dropped image as Markdown" })
 
 vim.keymap.set("n", "<leader>pc", "<cmd>CreateMdLink<CR>", { desc = "Create markdown file from [[link]]" })
@@ -107,5 +109,9 @@ vim.keymap.set("n", "<leader>pc", "<cmd>CreateMdLink<CR>", { desc = "Create mark
 vim.keymap.set("n", "<leader>po", "<cmd>OpenMdLink<CR>", { desc = "Open markdown file from [[link]]" })
 
 -- Git inspection only; builds and operational commands stay in WezTerm / Zsh.
-vim.keymap.set("n", "<leader>gd", function() require("gitsigns").preview_hunk() end, { desc = "Preview Git diff hunk" })
-vim.keymap.set("n", "<leader>gl", function() require("gitsigns").diffthis() end, { desc = "Compare buffer with Git index" })
+vim.keymap.set("n", "<leader>gd", function()
+	require("gitsigns").preview_hunk()
+end, { desc = "Preview Git diff hunk" })
+vim.keymap.set("n", "<leader>gl", function()
+	require("gitsigns").diffthis()
+end, { desc = "Compare buffer with Git index" })

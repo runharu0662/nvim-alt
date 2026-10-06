@@ -1,34 +1,27 @@
--- expandtab
+-- Indentation
 vim.opt.expandtab = true
--- tabstop
 vim.opt.tabstop = 4
--- softtabstop
 vim.opt.softtabstop = 4
--- shiftwidth
 vim.opt.shiftwidth = 4
--- number
-vim.opt.number = true
 
--- new split direction
+-- Line numbers and scrolling
+vim.opt.number = true
+vim.api.nvim_set_option("scrolloff", 4)
+
+-- Open new splits to the right and below
 vim.o.splitright = true
 vim.o.splitbelow = true
 
-vim.api.nvim_set_option("scrolloff", 4)
-
--- clipboard
+-- Use the system clipboard
 vim.opt.clipboard = "unnamedplus"
 
--- disable "~"
+-- Hide end-of-buffer markers
 vim.opt.fillchars:append({ eob = " " })
 
--- disabele cmdline
+-- Command line, status line, and tab line
 vim.opt.cmdheight = 0
-
--- grobalize statusline
 vim.opt.laststatus = 3
-
--- disable tabline
 vim.opt.showtabline = 0
 
--- disable line
+-- Keep the sign column visible
 vim.opt.signcolumn = "yes"

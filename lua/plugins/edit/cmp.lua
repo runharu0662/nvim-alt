@@ -19,7 +19,11 @@ return {
 				local enabled = vim.fn["skkeleton#is_enabled"]()
 				return enabled == false or enabled == 0
 			end,
-			snippet = { expand = function(args) vim.snippet.expand(args.body) end },
+			snippet = {
+				expand = function(args)
+					vim.snippet.expand(args.body)
+				end,
+			},
 			completion = {
 				completeopt = "menu,menuone,noinsert",
 			},
