@@ -1,6 +1,7 @@
 -- Copilot
 vim.api.nvim_create_user_command("CopilotToggle", function()
-	local ok, copilot = pcall(require, "copilot.api")
+	require("lazy").load({ plugins = { "copilot.lua" } })
+	local ok, copilot = pcall(require, "copilot.client")
 	if not ok then
 		vim.notify("Copilot is not loaded yet", vim.log.levels.WARN)
 		return
