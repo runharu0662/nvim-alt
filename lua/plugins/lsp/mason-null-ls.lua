@@ -29,18 +29,8 @@ return {
 
 		-- Mason-null-ls integration: auto-install and auto-register tools
 		mason_null_ls.setup({
-			ensure_installed = {
-				"stylua", -- Lua formatter
-				"prettier", -- JS, HTML, CSS formatter
-				"clang-format", -- C/C++ formatter
-				"cpplint", -- C++ linter
-				"eslint", -- JS/TS linter
-				"golangci-lint", -- Go linter
-				"stylelint", -- CSS linter
-				"markuplint",
-				"stylelint", -- CSS linter
-				"goimports", -- Go imports formatter
-			},
+			ensure_installed = {},
+			automatic_installation = false,
 			handlers = {}, -- Enable automatic registration of installed sources
 		})
 	end,

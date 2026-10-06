@@ -9,6 +9,16 @@ return {
 		local map = cmp.mapping
 
 		cmp.setup({
+			enabled = function()
+				if vim.bo.filetype == "markdown" then
+					return false
+				end
+				if vim.fn.exists("*skkeleton#is_enabled") == 0 then
+					return true
+				end
+				local enabled = vim.fn["skkeleton#is_enabled"]()
+				return enabled == false or enabled == 0
+			end,
 			completion = {
 				completeopt = "menu,menuone,noinsert",
 			},

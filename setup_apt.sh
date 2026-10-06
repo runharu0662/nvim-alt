@@ -2,7 +2,7 @@
 set -e
 
 # This script sets up the basic environment for the Neovim configuration on Debian/Ubuntu.
-# Development tools like LSPs, linters, and formatters are managed by `mason.nvim` automatically.
+# Japanese input uses Deno and an SKK dictionary; see README.md.
 
 echo "[1/5] Updating APT packages..."
 sudo apt update && sudo apt upgrade -y
@@ -19,18 +19,9 @@ sudo apt install -y neovim
 echo 'export NVIM_APPNAME=nvim-alt' >> ~/.bashrc
 export NVIM_APPNAME=nvim-alt
 
-echo "[4/5] Installing language runtimes (Go, Node.js, Python)..."
-# Go, Node.js, and Python are required for some LSPs and tools.
-# The specific tools (gopls, tsserver, pyright, cpplint etc.) will be installed by mason.nvim.
-sudo apt install -y golang python3.12-venv
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
-sudo apt install -y nodejs
-
-# Add Go and user-local binaries to PATH
-GOPATH=$(go env GOPATH)
-echo 'export PATH=$PATH:'"$GOPATH"'/bin' >> ~/.bashrc
-echo 'export PATH=$PATH:~/.local/bin' >> ~/.bashrc
-export PATH=$PATH:$GOPATH/bin:~/.local/bin
+echo "[4/5] Japanese input prerequisites..."
+echo "Install Deno separately and place SKK-JISYO.L at ~/.skk/SKK-JISYO.L."
+echo "See README.md for links and configuration."
 
 echo "[5/5] Nerd Font (JetBrainsMono) installation (optional)..."
 read -p "👉 Install Nerd Font for terminal icons? (y/N): " install_font
@@ -57,4 +48,4 @@ fi
 
 echo "Setup complete ✅"
 echo "👉 Restart your shell or run: source ~/.bashrc"
-echo "👉 Open Neovim and run :Mason to see the tools being installed automatically."
+echo "👉 Open Neovim and use Ctrl-j in insert mode to toggle Japanese input."
