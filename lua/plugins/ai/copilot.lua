@@ -16,6 +16,6 @@ return {
 			},
 		},
 		panel = { enabled = false },
-		filetypes = { markdown = false, text = false, ["*"] = true },
+		filetypes = { markdown = true, mdx = true, text = false, ["*"] = true },
 	},
 }
