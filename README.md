@@ -31,6 +31,8 @@ ESLint はプロジェクトの ESLint 設定に従って診断・コードア�
 
 ## 開発ツールの導入
 
+Treesitter は `main` の新 API を使うため、Neovim 0.12 以降と tree-sitter CLI 0.26.1 以降が必要です。macOS では dotfiles の Brewfile から導入します。初回起動時にパーサーを非同期で取得し、完了後にファイルを開き直すとハイライトとインデントが有効になります。
+
 Neovim 0.11 以降の LSP・組み込み snippet API を使います。Node 系 LSP / Prettier / ESLint には Node.js、Go の開発には Go が必要です。
 必要なものだけ `:Mason` または環境のパッケージマネージャーで導入してください。
 

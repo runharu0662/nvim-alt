@@ -45,16 +45,16 @@ end
 for _, file in ipairs(vim.fn.glob("after/**/*.lua", false, true)) do
 	assert(loadfile(file), file)
 end
-local parsers = require("nvim-treesitter.parsers").get_parser_configs()
-local ts_opts
-local configs = require("nvim-treesitter.configs")
-local old_setup = configs.setup
-configs.setup = function(opts)
-	ts_opts = opts
+local parsers = require("nvim-treesitter.parsers")
+local ts_languages
+local treesitter = require("nvim-treesitter")
+local old_install = treesitter.install
+treesitter.install = function(languages)
+	ts_languages = languages
 end
 dofile("lua/plugins/edit/treesitter.lua").config()
-configs.setup = old_setup
-for _, name in ipairs(ts_opts.ensure_installed) do
+treesitter.install = old_install
+for _, name in ipairs(ts_languages) do
 	assert(parsers[name], "Unknown parser " .. name)
 end
 
