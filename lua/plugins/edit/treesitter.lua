@@ -7,6 +7,8 @@ return {
 		local treesitter = require("nvim-treesitter")
 		treesitter.setup({ install_dir = vim.fn.stdpath("data") .. "/site" })
 		vim.treesitter.language.register("json", "jsonc")
+		vim.filetype.add({ extension = { mdx = "mdx" } })
+		vim.treesitter.language.register("markdown", "mdx")
 
 		local languages = {
 			"lua",
