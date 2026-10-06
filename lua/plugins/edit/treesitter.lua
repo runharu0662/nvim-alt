@@ -18,8 +18,6 @@ return {
 				"json",
 				"yaml",
 				"bash",
-				"markdown",
-				"markdown_inline",
 				"python",
 				"go",
 				"typescript",

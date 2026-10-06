@@ -102,9 +102,27 @@ vim.keymap.set("n", "<leader>th", function()
 	hori_term:toggle()
 end, { desc = "Toggle horizontal terminal" })
 
--- obsidian like
-vim.keymap.set("n", "<leader>pi", ":PasteClipboardImage<CR>", { desc = "Paste dropped image as Markdown" })
+-- make_stdin
+vim.keymap.set("n", "<Space>js", ":wa <bar> :RunInput<CR>", { noremap = true, silent = true, desc = "cpp RunInput" })
+vim.keymap.set("n", "<Space>jt", ":InsTemp<CR>", { noremap = true, silent = true, desc = "Insert cpp Template" })
 
-vim.keymap.set("n", "<leader>pc", "<cmd>CreateMdLink<CR>", { desc = "Create markdown file from [[link]]" })
+-- run_cpp
 
-vim.keymap.set("n", "<leader>po", "<cmd>OpenMdLink<CR>", { desc = "Open markdown file from [[link]]" })
+local function run_cpp()
+	vim.cmd("wa") -- Save all files before running
+	local file = vim.fn.expand("%")
+
+	local cmd = "/opt/homebrew/bin/gtime -f '[Time] %es\n\n\n' g++ -std=c++20 "
+		.. file
+		.. " -o a.out && ./a.out < stdin.txt"
+
+	local cpp_term = Terminal:new({
+		cmd = cmd,
+		direction = "float",
+		close_on_exit = false,
+	})
+
+	cpp_term:toggle()
+end
+
+vim.keymap.set("n", "<leader>jj", run_cpp, { desc = "Run C++ with stdin and time", silent = true })
