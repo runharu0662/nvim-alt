@@ -50,12 +50,12 @@ end, {})
 -- Helper: Extract the [[filename]] under the cursor
 local function get_link_under_cursor()
 	local line = vim.api.nvim_get_current_line()
-	local col = vim.fn.col(".") - 1
+	local col = vim.fn.col(".")
 	local start, finish = nil, nil
 
 	-- Search for [[...]] pattern in the current line
 	for s, e in line:gmatch("()%[%[.-%]%]()", 1) do
-		if col >= s and col <= e then
+		if col >= s and col < e then
 			start = s
 			finish = e - 3 -- exclude the final closing bracket (]])
 			break
@@ -92,7 +92,7 @@ local function create_md_link()
 
 	vim.fn.writefile({}, path) -- create empty file
 	vim.notify("Markdown file created: " .. path, vim.log.levels.INFO)
-	vim.cmd("edit " .. path)
+	vim.cmd("edit " .. vim.fn.fnameescape(path))
 end
 
 -- Open an existing markdown file based on the [[filename]] under cursor
@@ -109,7 +109,7 @@ local function open_md_link()
 		return
 	end
 
-	vim.cmd("edit " .. path)
+	vim.cmd("edit " .. vim.fn.fnameescape(path))
 end
 
 -- Create user commands :CreateMdLink and :OpenMdLink

@@ -1,14 +1,8 @@
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
+	dependencies = { "williamboman/mason.nvim", "hrsh7th/cmp-nvim-lsp" },
 	config = function()
-		vim.lsp.config("lua_ls", {
-			settings = {
-				Lua = {
-					diagnostics = { globals = { "vim" } },
-					workspace = { checkThirdParty = false },
-				},
-			},
-		})
+		require("config.development").setup_lsp()
 	end,
 }

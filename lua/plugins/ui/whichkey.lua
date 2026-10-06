@@ -20,6 +20,7 @@ return {
 		wk.add({
 			{ "<leader>l", group = "Copilot" }, -- group
 			{ "<leader>f", group = "telescope" }, -- group
+			{ "<leader>g", group = "Git" },
 			{ "<leader>h", group = "hop" },
 			{ "<leader>r", group = "rename" },
 			{ "<leader>c", group = "code action" },

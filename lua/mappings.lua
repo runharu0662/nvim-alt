@@ -58,10 +58,7 @@ vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Telescope help ta
 
 -- LSP formatting
 vim.keymap.set("n", "<leader>n", function()
-	vim.lsp.buf.format({
-		timeout_ms = 200,
-		async = true,
-	})
+	require("config.development").format({ async = true })
 end, { desc = "Format with LSP" })
 
 -- close buffer
@@ -108,3 +105,7 @@ vim.keymap.set("n", "<leader>pi", ":PasteClipboardImage<CR>", { desc = "Paste dr
 vim.keymap.set("n", "<leader>pc", "<cmd>CreateMdLink<CR>", { desc = "Create markdown file from [[link]]" })
 
 vim.keymap.set("n", "<leader>po", "<cmd>OpenMdLink<CR>", { desc = "Open markdown file from [[link]]" })
+
+-- Git inspection only; builds and operational commands stay in WezTerm / Zsh.
+vim.keymap.set("n", "<leader>gd", function() require("gitsigns").preview_hunk() end, { desc = "Preview Git diff hunk" })
+vim.keymap.set("n", "<leader>gl", function() require("gitsigns").diffthis() end, { desc = "Compare buffer with Git index" })
