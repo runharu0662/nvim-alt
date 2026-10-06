@@ -10,57 +10,109 @@ vim.g.mapleader = " "
 require("mason").setup({ install_root_dir = vim.fn.stdpath("data") .. "/mason" })
 dofile("lua/plugins/edit/cmp.lua").config()
 dofile("lua/plugins/lsp/nvim-lspconfig.lua").config()
-dofile("lua/plugins/lsp/mason-null-ls.lua").config()
+dofile("lua/plugins/lsp/none-ls.lua").config()
 require("telescope").setup(dofile("lua/plugins/tools/telescope.lua").opts)
-require("toggleterm").setup({})
 dofile("lua/mappings.lua")
 dofile("lua/func/functions.lua")
+
+-- Bundled dictionary lookup must work outside the config directory.
+local original_config, original_keymap = vim.fn["skkeleton#config"], vim.fn["skkeleton#register_keymap"]
+local dictionary_config
+vim.fn["skkeleton#config"] = function(opts)
+	dictionary_config = opts
+end
+vim.fn["skkeleton#register_keymap"] = function() end
+local skk = dofile(root .. "/lua/plugins/edit/skkeleton.lua")
+skk.init()
+vim.cmd("cd /tmp")
+vim.api.nvim_exec_autocmds("User", { pattern = "skkeleton-initialize-pre" })
+assert(dictionary_config.globalDictionaries[1] == root .. "/dictionaries/SKK-JISYO.L")
+assert(vim.fn.filereadable(dictionary_config.globalDictionaries[1]) == 1)
+vim.g.skk_dictionary_path = root .. "/dictionaries/SKK-JISYO.L"
+vim.api.nvim_exec_autocmds("User", { pattern = "skkeleton-initialize-pre" })
+assert(dictionary_config.globalDictionaries[1] == vim.g.skk_dictionary_path)
+vim.g.skk_dictionary_path = nil
+vim.cmd("cd " .. vim.fn.fnameescape(root))
+vim.fn["skkeleton#config"], vim.fn["skkeleton#register_keymap"] = original_config, original_keymap
 
 local tools = require("config.development")
 for name in pairs(tools.servers) do
 	assert(vim.lsp.config[name], name)
 end
-for _, file in ipairs(vim.fn.glob("lua/**/*.lua", false, true)) do assert(loadfile(file), file) end
-for _, file in ipairs(vim.fn.glob("after/**/*.lua", false, true)) do assert(loadfile(file), file) end
+for _, file in ipairs(vim.fn.glob("lua/**/*.lua", false, true)) do
+	assert(loadfile(file), file)
+end
+for _, file in ipairs(vim.fn.glob("after/**/*.lua", false, true)) do
+	assert(loadfile(file), file)
+end
 local parsers = require("nvim-treesitter.parsers").get_parser_configs()
 local ts_opts
 local configs = require("nvim-treesitter.configs")
 local old_setup = configs.setup
-configs.setup = function(opts) ts_opts = opts end
+configs.setup = function(opts)
+	ts_opts = opts
+end
 dofile("lua/plugins/edit/treesitter.lua").config()
 configs.setup = old_setup
-for _, name in ipairs(ts_opts.ensure_installed) do assert(parsers[name], "Unknown parser " .. name) end
+for _, name in ipairs(ts_opts.ensure_installed) do
+	assert(parsers[name], "Unknown parser " .. name)
+end
 
-for _, key in ipairs({" lt", " v", " ca", " rn", " e", " ff", " fg", " fb", " fh", " n", " bc", " tf", " tv", " th", " pi", " pc", " po"}) do
+for _, key in ipairs({ " lt", " v", " ca", " rn", " e", " ff", " fg", " fb", " fh", " n", " bc", " pi", " pc", " po" }) do
 	assert(vim.fn.maparg(key, "n") ~= "", "Missing existing mapping: " .. key)
 end
-local baseline = vim.fn.system({ "git", "show", "simple:lua/mappings.lua" })
-assert(vim.v.shell_error == 0, "Cannot read simple mapping baseline")
-assert(loadstring(baseline))()
-local before = {}
-for _, mode in ipairs({ "n", "v", "i", "c" }) do before[mode] = vim.api.nvim_get_keymap(mode) end
-dofile("lua/mappings.lua")
-for mode, maps in pairs(before) do
-	for _, map in ipairs(maps) do
-		local current
-		for _, candidate in ipairs(vim.api.nvim_get_keymap(mode)) do
-			if candidate.lhs == map.lhs then current = candidate; break end
-		end
-		assert(current, "Removed mapping: " .. map.lhs)
-		assert(current.rhs == map.rhs and current.desc == map.desc, "Changed mapping: " .. map.lhs)
+-- Native motions and retired terminal mappings must stay available / absent.
+for _, mode in ipairs({ "n", "v", "o" }) do
+	for _, key in ipairs({ "f", "F", "t", "T" }) do
+		assert(vim.fn.maparg(key, mode) == "", "Native motion overridden: " .. key)
 	end
 end
+for _, key in ipairs({ " tf", " tv", " th" }) do
+	assert(vim.fn.maparg(key, "n") == "", "Retired terminal mapping: " .. key)
+end
+local old_action, old_float = vim.lsp.buf.code_action, vim.diagnostic.open_float
+local action_called, diagnostic_called = false, false
+vim.lsp.buf.code_action = function()
+	action_called = true
+end
+vim.diagnostic.open_float = function(_, opts)
+	diagnostic_called = opts.focus == false and opts.border == "rounded"
+end
+dofile("lua/mappings.lua")
+for _, map in ipairs(vim.api.nvim_get_keymap("n")) do
+	if map.lhs == " ca" or map.lhs == " cd" then
+		map.callback()
+	end
+end
+assert(action_called and diagnostic_called, "Native LSP / diagnostic actions failed")
+vim.lsp.buf.code_action, vim.diagnostic.open_float = old_action, old_float
+dofile("lua/user/ui.lua")
+dofile("lua/options.lua")
+assert(vim.wo.cursorline)
+assert(#vim.api.nvim_get_autocmds({ event = "CursorHold" }) == 0, "Diagnostics should open explicitly")
+for _, mapping in ipairs(dofile("lua/plugins/edit/hop.lua").keys) do
+	assert(mapping[1] ~= "t" and mapping[1] ~= "T")
+end
+
 assert(vim.fn.exists(":RunInput") == 0 and vim.fn.exists(":InsTemp") == 0)
 assert(vim.fn.exists(":CreateMdLink") == 2 and vim.fn.exists(":PasteClipboardImage") == 2)
 
-for name in pairs(tools.servers) do vim.lsp.enable(name, false) end
+for name in pairs(tools.servers) do
+	vim.lsp.enable(name, false)
+end
 
 -- Verify one formatting client, provider priority, absent-tool fallback, and no ESLint formatting.
 local old_clients, old_format, old_executable = vim.lsp.get_clients, vim.lsp.buf.format, tools.executable
 local formatted, installed = nil, {}
-vim.lsp.get_clients = function() return {{id=1,name="gopls"},{id=2,name="null-ls"},{id=3,name="eslint"}} end
-vim.lsp.buf.format = function(opts) formatted = opts end
-tools.executable = function(command) return installed[command] and "/test/" .. command or nil end
+vim.lsp.get_clients = function()
+	return { { id = 1, name = "gopls" }, { id = 2, name = "null-ls" }, { id = 3, name = "eslint" } }
+end
+vim.lsp.buf.format = function(opts)
+	formatted = opts
+end
+tools.executable = function(command)
+	return installed[command] and "/test/" .. command or nil
+end
 vim.bo.filetype = "go"
 tools.format()
 assert(formatted.id == 1)
@@ -68,15 +120,19 @@ installed.goimports = true
 tools.format()
 assert(formatted.id == 2)
 vim.bo.filetype = "typescript"
-installed = {prettier=true}
-tools.format({async=true})
+installed = { prettier = true }
+tools.format({ async = true })
 assert(formatted.id == 2 and formatted.async)
-vim.lsp.get_clients = function() return {{id=3,name="eslint"}} end
+vim.lsp.get_clients = function()
+	return { { id = 3, name = "eslint" } }
+end
 formatted = nil
-tools.format({quiet=true})
+tools.format({ quiet = true })
 assert(formatted == nil)
 local called = false
-vim.lsp.config.gopls.root_dir(0, function() called=true end)
+vim.lsp.config.gopls.root_dir(0, function()
+	called = true
+end)
 assert(not called, "Missing server should not start")
 vim.lsp.get_clients, vim.lsp.buf.format, tools.executable = old_clients, old_format, old_executable
 
@@ -84,16 +140,29 @@ vim.bo.filetype = "markdown"
 dofile("after/ftplugin/markdown.lua")
 assert(vim.wo.wrap and vim.wo.linebreak and vim.bo.textwidth == 0)
 assert(not require("cmp").get_config().enabled())
-local writes = vim.api.nvim_get_autocmds({group="web_formatting",event="BufWritePre"})
+local writes = vim.api.nvim_get_autocmds({ group = "web_formatting", event = "BufWritePre" })
 assert(#writes == 1)
 local old_helper = tools.format
 called = false
-tools.format = function() called=true end
-writes[1].callback({buf=vim.api.nvim_get_current_buf()})
+tools.format = function()
+	called = true
+end
+writes[1].callback({ buf = vim.api.nvim_get_current_buf() })
 assert(not called, "Markdown must not be autoformatted")
 tools.format = old_helper
 local lock = vim.json.decode(table.concat(vim.fn.readfile("lazy-lock.json"), "\n"))
 assert(lock.skkeleton and lock["denops.vim"] and lock["none-ls.nvim"])
+assert(lock["neoscroll.nvim"] and lock["alpha-nvim"] and lock["ascii.nvim"])
+for _, name in ipairs({
+	"mason-null-ls.nvim",
+	"fidget.nvim",
+	"lspsaga.nvim",
+	"toggleterm.nvim",
+	"nvim-cursorline",
+	"CopilotChat.nvim",
+}) do
+	assert(not lock[name], "Retired plugin in lockfile: " .. name)
+end
 -- Exercise the real none-ls -> gofmt fallback when Go is available on this machine.
 if vim.fn.executable("gofmt") == 1 then
 	local fixture = vim.fn.tempname() .. "-web-go"
@@ -101,11 +170,17 @@ if vim.fn.executable("gofmt") == 1 then
 	vim.fn.writefile({ "package main", 'func main(){println("ok")}' }, fixture .. "/main.go")
 	vim.cmd("edit " .. vim.fn.fnameescape(fixture .. "/main.go"))
 	vim.bo.filetype = "go"
-	assert(vim.wait(3000, function()
-		return #vim.lsp.get_clients({bufnr=0,method="textDocument/formatting"}) > 0
-	end), "none-ls did not attach to Go fixture")
+	assert(
+		vim.wait(3000, function()
+			return #vim.lsp.get_clients({ bufnr = 0, method = "textDocument/formatting" }) > 0
+		end),
+		"none-ls did not attach to Go fixture"
+	)
 	tools.format()
-	assert(table.concat(vim.api.nvim_buf_get_lines(0,0,-1,false), "\n"):find('func main%(%) {'), "Real Go formatting failed")
+	assert(
+		table.concat(vim.api.nvim_buf_get_lines(0, 0, -1, false), "\n"):find("func main%(%) {"),
+		"Real Go formatting failed"
+	)
 	vim.bo.modified = false
 	print("PASS: real Go formatting through none-ls")
 end

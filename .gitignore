@@ -1,0 +1,4 @@
+# Local / learned SKK dictionaries must not be published.
+SKK-JISYO.*
+!dictionaries/SKK-JISYO.L
+skkeleton-user-jisyo*

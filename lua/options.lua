@@ -25,3 +25,6 @@ vim.opt.showtabline = 0
 
 -- Keep the sign column visible
 vim.opt.signcolumn = "yes"
+
+-- Highlight the current line with Neovim's built-in UI
+vim.opt.cursorline = true

@@ -1,5 +1,3 @@
-local icons = require("user.icons")
-
 local M = {
 	"nvim-lualine/lualine.nvim",
 	dependencies = {

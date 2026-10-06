@@ -1,7 +1,7 @@
 return {
-	"jay-babu/mason-null-ls.nvim",
+	"nvimtools/none-ls.nvim",
 	lazy = false,
-	dependencies = { "williamboman/mason.nvim", "nvimtools/none-ls.nvim", "nvim-lua/plenary.nvim" },
+	dependencies = { "williamboman/mason.nvim", "nvim-lua/plenary.nvim" },
 	config = function()
 		local null_ls = require("null-ls")
 		local tools = require("config.development")
@@ -24,12 +24,6 @@ return {
 				null_ls.builtins.formatting.shfmt.with({ runtime_condition = available("shfmt") }),
 				null_ls.builtins.formatting.stylua.with({ runtime_condition = available("stylua") }),
 			},
-		})
-		-- Explicit source list: installed tools must not silently introduce another formatter / linter.
-		require("mason-null-ls").setup({
-			ensure_installed = {},
-			automatic_installation = false,
-			handlers = { function() end },
 		})
 		tools.setup_formatting()
 	end,

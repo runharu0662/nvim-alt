@@ -20,7 +20,7 @@ echo 'export NVIM_APPNAME=nvim-alt' >> ~/.bashrc
 export NVIM_APPNAME=nvim-alt
 
 echo "[4/5] Japanese input prerequisites..."
-echo "Install Deno separately and place SKK-JISYO.L at ~/.skk/SKK-JISYO.L."
+echo "Install Deno separately. SKK-JISYO.L is bundled with this configuration."
 echo "See README.md for links and configuration."
 
 echo "[5/5] Nerd Font (JetBrainsMono) installation (optional)..."

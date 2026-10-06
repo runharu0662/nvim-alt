@@ -24,7 +24,12 @@ vim.keymap.set("n", "<leader>v", ":vsplit<CR>", {
 })
 
 -- LSP code actions
-vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { desc = "Code Action" })
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+
+-- Show diagnostics explicitly
+vim.keymap.set("n", "<leader>cd", function()
+	vim.diagnostic.open_float(nil, { focus = false, border = "rounded" })
+end, { desc = "Show line diagnostics" })
 
 -- Notification history
 local telescope = require("telescope")
@@ -37,10 +42,6 @@ end, {
 
 -- LSP rename
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol (LSP)" })
-
--- Move to the start and end of the line
-vim.keymap.set({ "n", "v" }, "F", "$", { noremap = true })
-vim.keymap.set({ "n", "v" }, "f", "0", { noremap = true })
 
 -- Move between windows
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
@@ -65,41 +66,6 @@ end, { desc = "Format with LSP" })
 
 -- Close buffer
 vim.keymap.set("n", "<leader>bc", "<cmd>bdelete<CR>", { desc = "Close current buffer" })
-
--- Terminals
-local Terminal = require("toggleterm.terminal").Terminal
-
--- Float terminal
-local float_term = Terminal:new({
-	direction = "float",
-	float_opts = {
-		border = "rounded",
-	},
-	hidden = true,
-})
-vim.keymap.set("n", "<leader>tf", function()
-	float_term:toggle()
-end, { desc = "Toggle float terminal" })
-
--- Vertical split terminal
-local vert_term = Terminal:new({
-	direction = "vertical",
-	size = 60,
-	hidden = true,
-})
-vim.keymap.set("n", "<leader>tv", function()
-	vert_term:toggle()
-end, { desc = "Toggle vertical terminal" })
-
--- Horizontal split terminal
-local hori_term = Terminal:new({
-	direction = "horizontal",
-	size = 15,
-	hidden = true,
-})
-vim.keymap.set("n", "<leader>th", function()
-	hori_term:toggle()
-end, { desc = "Toggle horizontal terminal" })
 
 -- Markdown links and images
 vim.keymap.set("n", "<leader>pi", ":PasteClipboardImage<CR>", { desc = "Paste dropped image as Markdown" })

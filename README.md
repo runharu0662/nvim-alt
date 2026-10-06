@@ -1,11 +1,11 @@
 # web: Go・Web・Cloud / IaC・日本語執筆用 Neovim
 
-`web` は `simple` の日本語・Markdown 設定を基に、既存操作を保持して開発機能を追加した構成です。
+`web` は `simple` の日本語・Markdown 設定を基に、開発機能を追加し、重複する連携とUIを整理した構成です。
 `full` は従来の全部入り構成、`cpp` は競技プログラミング構成です。
 
 Neovim は編集・検索・LSP・整形・lint・Git 差分・記事執筆を担当します。
 build / test / terraform plan・apply / AWS CLI / Docker / kubectl は WezTerm + Zsh で実行します。
-既存の ToggleTerm キーは互換性のため保持し、CLI ラッパーや自動実行機能は追加していません。
+ターミナル操作は WezTerm に集約しています。
 
 ## 言語と担当ツール
 
@@ -48,7 +48,7 @@ Web プロジェクトの Prettier / ESLint はプロジェクト側の devDepen
 
 ## キー操作と保存時の動作
 
-`<leader>` は Space です。既存のマッピングは保持しています。
+`<leader>` は Space です。基本のマッピングは保持し、コードアクションは組み込み LSP に統一しています。
 
 | 操作 | キー / コマンド |
 |---|---|
@@ -56,12 +56,12 @@ Web プロジェクトの Prettier / ESLint はプロジェクト側の devDepen
 | ファイル / 全文 / バッファ / ヘルプ検索 | `<leader>ff` / `fg` / `fb` / `fh` |
 | 整形 | `<leader>n`（整形先を一つだけ選択） |
 | rename / code action | `<leader>rn` / `ca` |
+| カーソル行の診断 | `<leader>cd`（明示操作で表示） |
 | definition / references | `gd` / `gr`（LSP 接続時、既存の割り当てがなければ追加） |
 | Go / TS の import 整理 | `:OrganizeImports`（該当 LSP 接続時） |
 | ESLint の修正 | `:LspEslintFixAll` または既存の code action |
 | Git 差分の部分表示 / index と比較 | `<leader>gd` / `gl`（新規追加） |
 | Copilot の切り替え | `<leader>lt` |
-| 既存のターミナル | `<leader>tf` / `tv` / `th` |
 
 コード保存時は formatter を一つ選んで同期整形します。Go では goimports があれば import 整理も行います。
 ESLint の fix-all は保存時に強制しません。
@@ -71,10 +71,12 @@ Markdown は保存時の自動整形を行わず、記事の改行・空白を�
 ## 日本語入力
 
 - [Deno](https://deno.com/) を PATH に配置します。
-- [SKK 辞書](https://skk-dev.github.io/dict/)の `SKK-JISYO.L` を展開し、`~/.skk/SKK-JISYO.L` に配置します。
+- `dictionaries/SKK-JISYO.L` を同梱しています。設定リポジトリをコピーすれば、環境ごとの辞書配置は不要です。
 - 挿入・コマンドラインモードの `<C-j>` で skkeleton を切り替えます。
 - 変換中は `<C-n>` / `<C-p>` で候補移動、`<C-y>` で確定、`<C-e>` でキャンセルします。
-- 辞書の場所は `init.lua` で `vim.g.skk_dictionary_path` を指定できます。
+- 別の辞書を使う場合だけ、`init.lua` で `vim.g.skk_dictionary_path` を指定します。標準の辞書パスは設定ファイルの位置から解決するため、作業ディレクトリや `NVIM_APPNAME` に依存しません。
+- 同梱版は公式配布の辞書のみです。個人の固有名詞・学習結果を含む辞書はリポジトリ外に保存し、Git に登録しません。
+- Deno／denops の実行依存は別途必要です。初回の依存取得にはネットワーク接続が必要です。
 
 Deno がない環境では skkeleton は読み込みません。辞書がない場合は初回使用時に通知します。
 
@@ -87,38 +89,30 @@ Deno がない環境では skkeleton は読み込みません。辞書がない�
 - `<leader>pi` の画像貼り付けには `pngpaste` と `vim.g.obsidian_vault_path` の設定が必要です。
 
 
-## プラグインの分類
+## プラグインの整理
 
-依頼に記載された KEEP / REMOVE / REVIEW で分類しています。4つ目の分類名は未指定です。
-今回、新規プラグインの追加・既存プラグインの削除は行っていません。
-削除候補でも既存キーや UI に影響するものは REVIEW に残しました。
+編集・検索・LSP・整形・Git・日本語入力を中心に構成しています。
 
-| 分類 | プラグイン | 判断 |
+| 対象 | 方針 | 理由 |
 |---|---|---|
-| KEEP | lazy.nvim | 管理と lockfile を維持 |
-| KEEP | nvim-treesitter | 対象言語の syntax highlight |
-| KEEP | telescope.nvim、plenary.nvim | 既存のファイル・全文検索、依存ライブラリ |
-| KEEP | nvim-lspconfig、mason.nvim、mason-lspconfig.nvim | LSP 設定と手動のツール導入 |
-| KEEP | none-ls.nvim、mason-null-ls.nvim | 既存の formatter 連携。ソース登録を明示化 |
-| KEEP | nvim-cmp、cmp-nvim-lsp、cmp-buffer | 既存の補完キーを保持、組み込み snippet 展開を追加 |
-| KEEP | gitsigns.nvim | Git 差分表示と確認 |
-| KEEP | skkeleton、denops.vim | 日本語入力 |
-| KEEP | copilot.lua、CopilotChat.nvim | 現在の AI 操作を保持 |
-| KEEP | neo-tree.nvim、nvim-web-devicons、nui.nvim | 既存のファイル操作と UI 依存 |
-| KEEP | hop.nvim、nvim-autopairs、which-key.nvim | 既存の移動・入力・キー案内 |
-| KEEP | lspsaga.nvim | 既存の code action 操作 |
-| REVIEW | toggleterm.nvim | 実行の主役は WezTerm。既存 tf / tv / th を守るため保持 |
-| REVIEW | tokyonight.nvim、lualine.nvim、alpha-nvim、ascii.nvim | 見た目・開始画面。今回の用途整理では変更しない |
-| REVIEW | nvim-notify、noice.nvim、fidget.nvim | 通知・進捗の表示用途を確認してから整理。既存の通知検索も保持 |
-| REVIEW | indent-blankline.nvim、nvim-cursorline、neoscroll.nvim | 装飾とスクロールの好みを確認してから整理 |
-| REMOVE | プラグイン該当なし | 重複だけを理由にワークフローを削除しない |
+| none-ls.nvim | 維持 | formatter を明示登録し、保存時と手動操作で使う |
+| mason-null-ls.nvim | 削除 | 自動導入・自動登録を使っていない。導入は `:Mason` で行う |
+| fidget.nvim | 削除 | LSP 進捗表示は Noice に統一 |
+| lspsaga.nvim | 削除 | コードアクションは組み込み LSP、診断は `<leader>cd` で表示 |
+| toggleterm.nvim | 削除 | CLI 操作は WezTerm に集約。`tf` / `tv` / `th` は廃止 |
+| nvim-cursorline | 削除 | 標準の `cursorline` で行を強調 |
+| CopilotChat.nvim | 削除 | エディタ内チャットと関連キーを整理。Copilot の補完・切り替えは維持 |
+| alpha-nvim、ascii.nvim、neoscroll.nvim | 維持 | 開始画面・ロゴ・スクロールの使い心地を維持 |
+| hop.nvim | 維持 | `<leader>hw` / `hl` / `hc` / `hp` で明示的にジャンプ |
+| indent-blankline.nvim | 維持 | YAML やコードのインデント構造を確認するため |
 
-設定上の重複は除去しました。自動登録で任意の formatter が増える処理、複数 LSP に同時に整形を頼む処理、無効な Mason の検索 CLI 導入設定が対象です。
-lockfile の既存 commit は維持しています。AWS 専用プラグイン、build / test runner、ターミナル機能の追加はありません。
+`f` / `F` / `t` / `T` は Neovim 標準の文字検索に戻しています。行頭・行末には `0` / `$` を使います。
+診断の自動ポップアップを廃止し、診断アイコンは `vim.diagnostic.config` に統一しています。
+lockfile は削除対象のみ除き、残すプラグインの commit は維持しています。
 
 ## 検証
 
-`tests/development.lua` は既存プラグインを読み、サーバー・parser の存在、simple のマッピング保持、整形先の選択、Markdown 保存時の保護を確認します。
+`tests/development.lua` は導入済みプラグインを読み、サーバー・parser の存在、基本のマッピングと標準移動キー、コードアクション・診断操作、整形先の選択、Markdown 保存時の保護を確認します。
 ネットワークでプラグインを取得するテストではありません。Go が導入されている場合は、一時ファイルで実際の none-ls 経由の Go 整形も確認します。
 通常の init / lazy 起動も、外部取得と Denops worker、parser 導入を止めた環境で確認済みです。外部 LSP との実通信・ESLint / Prettier の実プロジェクト動作・日本語変換・画像貼り付けは未確認です。
 

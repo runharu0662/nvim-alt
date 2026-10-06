@@ -23,7 +23,7 @@ return {
 			{ "<leader>g", group = "Git" },
 			{ "<leader>h", group = "hop" },
 			{ "<leader>r", group = "rename" },
-			{ "<leader>c", group = "code action" },
+			{ "<leader>c", group = "Code actions / diagnostics" },
 			-- { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
 			{ "<leader>p", group = "Markdown" },
 			{

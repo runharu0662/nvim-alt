@@ -1,27 +1,3 @@
--- ========= Diagnostics: show floating diagnostic on CursorHold =========
-vim.opt.updatetime = 500
-
-local diag_group = vim.api.nvim_create_augroup("runharu_diag_float", { clear = true })
-vim.api.nvim_create_autocmd("LspAttach", {
-	group = diag_group,
-	callback = function(args)
-		local buf = args.buf
-		local ft = vim.bo[buf].filetype
-		if ft == "nvimtree" or ft == "neogitcommitmessage" then
-			return
-		end
-
-		local buf_group = vim.api.nvim_create_augroup("runharu_diag_float_" .. buf, { clear = true })
-		vim.api.nvim_create_autocmd("CursorHold", {
-			group = buf_group,
-			buffer = buf,
-			callback = function()
-				vim.diagnostic.open_float(nil, { focus = false, border = "rounded" })
-			end,
-		})
-	end,
-})
-
 -- ========= PasteClipboardImage: save clipboard image to vault and insert markdown link =========
 vim.api.nvim_create_user_command("PasteClipboardImage", function()
 	local filename = os.date("%Y-%m-%d_%H-%M-%S") .. ".png"
